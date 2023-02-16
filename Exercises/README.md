@@ -1,65 +1,76 @@
 # :pencil2: Exercises
 
-The goal of these exercises is to create a CI/CT/CD workflow with GitHub Actions.
+The goal of these exercises is to create a Continuous Integration/Continuous
+Testing/Continuous Deployment (CI/CT/CD) workflow using Docker-based GitHub
+Actions.
 
-As you work progressively along all the ordered files, your workflow will become more complex and thorough.
+The numbered exercises walk through creating a basic CI action and iteratively
+build a complex, thorough workflow.
 
-### File Structures 🏗️
+## Repository Structure 🏗️
 
-Before you go through these exercises, please be aware of the existing file contents and structures in this repository.
+Before you go through these exercises, please be aware of the existing file
+contents and structures in this repository.
 
-| File/Folder name | What it is for |
-| ---------------- | -------------- |
-| Exercises 📁 | Directory that you are looking at it! This folder contains the list of exercises you can go through to learn GitHub Actions |
-| dependencies 📁 | This directory contains the files that can be enabled from **Dockerfile** 🐳 to install dependencies for different programming run time. You will create this Dockefile 🐳 from [Create Dockerfile](./01-Create-Dockerfile.md) |
-| library  📁 | This directory contains a sample [**entrypoint.sh**](../library/entrypoint.sh) that is called from **Dockerfile** 🐳 to run the application. Feel free to explore and to modify |
+| Directory       | Description                                                                                                                |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `Exercises/`    | The list of exercises you will complete                                                                                    |
+| `dependencies/` | The files that can be enabled from your `Dockerfile` to install dependencies for different runtimes                        |
+|                 | You will create this `Dockerfile` in the first exercise                                                                    |
+| `library/`      | Contains a sample [`entrypoint.sh`](../library/entrypoint.sh) that is called from your `Dockerfile` to run the application |
 
+## Exercises
 
+### Task 1: Create a Continuous Integration (CI) Workflow
 
+- [Step 1: Create a `Dockerfile`](./01-Create-Dockerfile.md)
+- [Step 2: Create a CI Action](./02-Create-CI-Action.md)
 
-### Steps 1: Create Continuous Integration (CI)
+### Task 2: Add Complexity to the Workflow
 
-- [Create Dockerfile](./01-Create-Dockerfile.md)
-- [Create CI Action](./02-Create-CI-Action.md)
+These steps will be more informative if you adopt
+[GitHub Flow](https://docs.github.com/en/get-started/quickstart/github-flow).
 
-### Steps 2: Adding more complexity to the CI
+- [Step 3: Create a QA Branch](./03-Create-QA-Branch.md)
+- [Step 4: Create a Context Job](./04-Create-Context-Job.md)
+- [Step 5: Create a Manual Job](./05-Create-Manual-Job.md)
+- [Step 6: Create a Dependent Job](./06-Create-Dependent-Job.md)
+- [Step 7: Create a Matrix Job](./07-Create-Matrix-Job.md)
+- [Step 8: Create a Reusable Workflow](./08-Create-Reusable-Workflow)
 
-- These steps would be more informative if you adopt a Git Flow:
-  - [Create QA Branch](./02.A-Create-QA-Branch.md)
-  - [Create Context Job](./02.B-Create-Context-Job.md)
+### Task 3: Dependency Management
 
-### Steps 3: Dependency Management
+- [Step 9: Create a Dependabot Config](./09-Create-Dependabot-Config.md)
+- [Step 10: Lock Your Dependencies](./10-Lock-Dependencies.md)
 
-- [Create Dependabot Config](./03-Create-Dependabot-Config.md)
-- [Lock Your Dependencies](./03.A-Lock-Dependencies.md)
+### Task 4: Continuous Testing (CT)
 
-### Step 4: Add Continuous Testing (CT)
+- [Step 11: Create Continuous Testing (CT) Actions](./11-Create-CT-Actions.md)
 
-- [Create CT Actions](./04-Create-CT-Actions.md)
+### Task 5: Security Scaning
 
-### Step 5: Security Scans
+- [Step 12: Add Security Scaning](./12-Add-Security-Scaning.md)
 
-- [Create Security Scan](./05-Create-Security-Scan.md)
+### Task 6: Artifact Management
 
-### Step 6: Actions for Artifacts Management
+- [Step 13: Upload and Download Build Artifacts](./13-Upload-Download-Artifacts.md)
+- [Step 14: Upload and Download from Artifactory](./14-Upload-Download-from-Artifactory.md)
+- [Step 15: Create and Use a GitHub Package](./15-Create-GitHub-Package.md)
 
-- [Upload and Download Build Artifacts](./06-Upload-Download-Artifacts.md)
+### Task 7: Continuous Deployment (CD)
 
-### Step 7: Create Continuous Deployment (CD)
+- [Step 16: Create CD Actions](./16-Create-CD-Actions.md)
+- [Step 17: Deploy a Docker Image](./17-Deploy-Docker.md)
+- [Step 18: Deploy a Release Image](./18-Deploy-Release.md)
 
-- [Create CD Actions](./07-Create-CD-Actions.md)
-- [Deploy Docker Image](./07.A-Deploy-Prod.md)
-- [Deploy Release Images](./07.B-Deploy-Release.md)
+### (Optional) Using GitHub Actions Beyond CI/CT/CD
 
-### Optional: Using Actions beyond CI/CT/CD
-
-- [Using Actions to Create Issues](./08.A-GitHub-Script-Actions.md)
-- [Using GitHub's API for Deployment to Update Environments](./08.B-Add-Deployment-API.md)
-- [**Advanced**: Wait for Steps to Require Other Jobs to Complete](./08.C-Add-Wait-For-Steps.md)
-- [**Advanced**: Additional information on Best Practices for Complex Workflows](./08.D-Split-Jobs-for-Speed.md)
-- [**Advanced**: Reusing a Local Action](./09-Create-New-Repo-To-Pull-In-Container.md)
+- [Step 19: Use GitHub Actions to Create Issues](./19-Create-Issues.md)
+- [Step 20: Use GitHub's Deployment API to Update Environments](./20-Deployment-API.md)
+- [Step 21: (**Advanced**) Add Dependencies Between Jobs](./21-Wait-for-Jobs.md)
+- [Step 22: (**Advanced**) Split Jobs for Faster Workflows](./22-Split-Jobs.md)
+- [Step 23: (**Advanced**) Reuse a Local Action](./23-Reuse-Local-Action.md)
 
 ## :book: Additional Resources
 
-- [GitHub Actions Documentation](https://docs.github.com/en/free-pro-team@latest/actions)
-- [Self-paced Learning Lab Course on DevOps Pipeline with GitHub Actions](https://lab.github.com/githubtraining/devops-with-github-actions)
+- [GitHub Actions Documentation](https://docs.github.com/en/actions)
