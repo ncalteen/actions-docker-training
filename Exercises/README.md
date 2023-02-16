@@ -31,7 +31,7 @@ contents and structures in this repository.
 These steps will be more informative if you adopt
 [GitHub Flow](https://docs.github.com/en/get-started/quickstart/github-flow).
 
-- [Step 3: Create a QA Branch](./03-Create-QA-Branch.md)
+- [Step 3: Create a Protected Branches](./03-Create-Protected-Branches.md)
 - [Step 4: Create a Context Job](./04-Create-Context-Job.md)
 - [Step 5: Create a Manual Job](./05-Create-Manual-Job.md)
 - [Step 6: Create a Dependent Job](./06-Create-Dependent-Job.md)
