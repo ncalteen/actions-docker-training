@@ -37,7 +37,7 @@ contents and structures in this repository.
 
 ### Task 3: Dependency Management
 
-- [Step 9: Create a Dependabot Config](./09-Create-Dependabot-Config.md)
+- [Step 9: Configure Dependabot](./09-Configure-Dependabot.md)
 - [Step 10: Lock Your Dependencies](./10-Lock-Dependencies.md)
 
 ### Task 4: Continuous Testing (CT)
