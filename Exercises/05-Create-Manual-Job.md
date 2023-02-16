@@ -4,13 +4,13 @@ GitHub Actions allows you to run jobs manually and pass in any needed inputs.
 This gives developers the flexability to incorporate manual steps into their
 workflows for situations where human intervention is needed.
 
-1. Create a branch named `Manual`
+1. Create a branch named `manual`
 
    ```bash
-   git checkout -b Manual
+   git checkout -b manual
    ```
 
-2. Create a file named `.github/workflows/05-manual.yml` with the following
+2. Create a file named `.github/workflows/manual.yml` with the following
    contents
 
    > **:warning: NOTE:** This job is primarily used for manual triggers.
@@ -51,8 +51,8 @@ workflows for situations where human intervention is needed.
    git commit -am 'Add manual workflow'
    ```
 
-4. Open a pull request and merge the `Manual` branch into the `main` branch,
-   making sure to delete the `Manual` branch after doing so
+4. Open a pull request and merge the `manual` branch into the `main` branch,
+   making sure to delete the `manual` branch after doing so
 5. Navigate to the **Actions** tab of your repository
 6. Select the **Manual Deployment** action
 7. Select **Run workflow**

@@ -7,10 +7,10 @@ our deployment pipeline. In this demo, we will use
 DockerHub as our base image, however you can replace this with any image of your
 choosing.
 
-1. Create a new branch named `Docker`
+1. Create a new branch named `docker`
 
    ```bash
-   git checkout -b Docker
+   git checkout -b docker
    ```
 
 2. In the root of the repository, create a new file named `Dockerfile` with the
@@ -98,5 +98,5 @@ choosing.
    git commit -am 'Add Dockerfile'
    ```
 
-4. Open a pull request and merge the `Docker` branch into the `main` branch,
-   making sure to delete the `Docker` branch after doing so
+4. Open a pull request and merge the `docker` branch into the `main` branch,
+   making sure to delete the `docker` branch after doing so

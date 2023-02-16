@@ -9,8 +9,8 @@ that certain jobs will not start until others complete successfully.
 > **:warning: NOTE:** If a job fails, all jobs that depend on it will be
 > skipped.
 
-1. Create a branch named `Dependent`
-2. Create a file named `.github/workflows/06-dependent.yml` with the following
+1. Create a branch named `dependent`
+2. Create a file named `.github/workflows/dependent.yml` with the following
    contents
 
    > **:warning: Note:** This job is primarily used for manual triggers.
@@ -69,8 +69,8 @@ that certain jobs will not start until others complete successfully.
    git commit -am 'Add dependent jobs workflow'
    ```
 
-4. Open a pull request and merge the `Dependent` branch into the `main` branch,
-   making sure to delete the `Dependent` branch after doing so
+4. Open a pull request and merge the `dependent` branch into the `main` branch,
+   making sure to delete the `dependent` branch after doing so
 
    In the pull request, you will see the _Dependent Jobs_ workflow running and
    the results when it completes. You can review the logs of the run and the

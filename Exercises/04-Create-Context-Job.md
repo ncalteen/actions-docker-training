@@ -6,13 +6,13 @@ different
 When a workflow runs, different contexts are made available to the workflow
 itself and any job(s) or step(s) it defines.
 
-1. Create a branch named `Context`
+1. Create a branch named `context`
 
    ```bash
-   git checkout -b Context
+   git checkout -b context
    ```
 
-2. Create a file named `.github/workflows/04-context.yml` with the following
+2. Create a file named `.github/workflows/context.yml` with the following
    contents
 
    > **:warning: Note:** This job is primarily used for debugging to show
@@ -29,7 +29,7 @@ itself and any job(s) or step(s) it defines.
          - main
 
    jobs:
-     context-info:
+     context:
        # Set the platform to run on
        runs-on: ubuntu-latest
 
@@ -67,5 +67,10 @@ itself and any job(s) or step(s) it defines.
    git commit -am 'Add context workflow'
    ```
 
-4. Open a pull request and merge the `Context` branch into the `main` branch,
-   making sure to delete the `Context` branch after doing so
+4. Open a pull request and merge the `context` branch into the `main` branch,
+   making sure to delete the `context` branch after doing so
+
+   In the pull request, you will see the _context_ workflow running and the
+   results when it completes. You can review the logs of the run and the steps
+   it took by selecting **Details** next to the action. You can experiment with
+   this action by making additional updates to the code and committing it.

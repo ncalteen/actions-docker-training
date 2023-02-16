@@ -11,10 +11,10 @@ we are going to create uses an open-source action called
 action will try to build the current `Dockerfile` and see if it compiles
 successfully.
 
-1. Create a new branch named `CI`
+1. Create a new branch named `ci`
 
    ```bash
-   git checkout -b CI
+   git checkout -b ci
    ```
 
 2. In the root of the repository, create a new directory named `.github`
@@ -29,7 +29,7 @@ successfully.
    mkdir .github/workflows
    ```
 
-4. Create a new file named `.github/workflows/02-ci.yml` with the following
+4. Create a new file named `.github/workflows/ci.yml` with the following
    contents
 
    ```yaml
@@ -79,8 +79,8 @@ successfully.
    git commit -am "Add CI workflow"
    ```
 
-6. Open a pull request and merge the `Docker` branch into the `main` branch,
-   making sure to delete the `Docker` branch after doing so
+6. Open a pull request and merge the `ci` branch into the `main` branch, making
+   sure to delete the `ci` branch after doing so
 
    In the pull request, you will see the _Continuous Integration_ workflow
    running and the results when it completes. You can review the logs of the run

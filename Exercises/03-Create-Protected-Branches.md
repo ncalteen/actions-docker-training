@@ -54,11 +54,11 @@ Git flow, you can use branch protection to ensure:
 8. In the **Protect matching branches** section, select **Require a pull request
    before merging**, and deselect **Require approvals**
 9. Select **Require status checks to pass before merging**, then search for the
-   `CI` action you created previously
+   `ci` action you created previously
 10. Select **Create**
 11. Select **Add rule**
 12. In the **Branch name pattern** text field, enter `release`
 13. In the **Protect matching branches** section, select **Require a pull
     request before merging**
 14. Select **Require status checks to pass before merging**, then search for the
-    `CI` action you created previously
+    `ci` action you created previously
