@@ -4,7 +4,7 @@ on:
   # Start the job on completion of the CI workflow
   workflow_run:
     workflows:
-      - CI
+      - Continuous Integration
     types:
       - completed
 
