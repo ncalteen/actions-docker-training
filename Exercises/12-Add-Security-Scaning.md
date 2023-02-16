@@ -1,74 +1,71 @@
 # Add Security Scaning
 
-The objective of _Security Scanning_ is to achieve constant feedback on your
-codes security risks and enable the process of testing your code base.
+Incorporating security scanning into your repository enables constant feedback
+on potential security risks in your codebase. GitHub provides a CodeQL action to
+provide semantic code analysis as part of your development workflow. Whenever a
+developer submits new code, the action will run a security scan on the code and
+provide feedback on any potential security risks.
 
-**GitHub Actions** run off of workflow files that are managed and maintained in
-your repository.
+[`github/codeql-action`](https://github.com/github/codeql-action)
 
-## Add a GitHub Action workflow file
+1. Create a branch named `security`
 
-1. Create a new branch of code called `Security`
-1. Create a new file named `.github/workflows/security.yml`
-1. Copy the code below to the newly created file:
+   ```bash
+   git checkout -b security
+   ```
+
+2. In the `.github/workflows/` directory, create a file named `security.yml`
+   with the following contents
 
    ```yml
-   ---
-   ##########################
-   ##########################
-   ## CodeQL Security Scan ##
-   ##########################
-   ##########################
-   name: CodeQl Analysis
+   name: CodeQL Security Analysis
 
-   #
-   # Documentation:
-   # https://help.github.com/en/articles/workflow-syntax-for-github-actions
-   # https://github.com/github/codeql-action
-   #
-
-   #############################
-   # Start the job on all push #
-   #############################
    on:
+     # Start the job on push
      push:
+       # Don't run on push to main
        branches-ignore:
-         - 'master'
          - 'main'
 
-   ###############
-   # Set the Job #
-   ###############
    jobs:
      scan:
-       # Name the Job
+       # Name the job
        name: CodeQL Analysis
-       # Set the agent to run on
+
+       # Set the platform to run on
        runs-on: ubuntu-latest
-       ##################
-       # Load all steps #
-       ##################
+
+       # Define the steps
        steps:
-         ##########################
-         # Checkout the code base #
-         ##########################
-         - name: Checkout Code
-           uses: actions/checkout@v2.3.4
+         # Checkout the codebase
+         - name: Checkout
+           uses: actions/checkout@v3
            with:
-             # Full git history is needed to get a proper list of changed files
+             # Full git history is needed to get a
+             # proper list of changed files
              fetch-depth: 0
 
-         #####################
-         # Initialize CodeQL #
-         #####################
+         # Initialize CodeQL
          - name: Initialize CodeQL
-           uses: github/codeql-action/init@v1
+           uses: github/codeql-action/init@v2
            with:
              languages: python
 
-         #######################
-         # Run CodeQL Analysis #
-         #######################
+         # Run CodeQL analysis
          - name: Perform CodeQL Analysis
-           uses: github/codeql-action/analyze@v1
+           uses: github/codeql-action/analyze@v2
    ```
+
+3. Commit the file
+
+   ```bash
+   git commit -am 'Add security workflow'
+   ```
+
+4. Open a pull request and merge the `security` branch into the `main` branch,
+   making sure to delete the `security` branch after doing so
+
+   In the pull request, you will see the _security_ workflow running and the
+   results when it completes. You can review the logs of the run and the steps
+   it took by selecting **Details** next to the action. You can experiment with
+   this action by making additional updates to the code and committing it.
