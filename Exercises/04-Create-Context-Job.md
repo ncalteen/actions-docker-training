@@ -30,6 +30,7 @@ You could then copy this code into another running workflow and see the output t
         # The type of runner that the job will run on
         runs-on: ubuntu-latest
 
+<<<<<<< Updated upstream
         # Steps represent a sequence of tasks that will be executed as part of the job
         steps:
         - name: Dump GitHub context
@@ -59,3 +60,47 @@ You could then copy this code into another running workflow and see the output t
     ```
     
 1. Open a pull request and merge the `context-job` branch into the `main` branch.
+=======
+       ####################
+       # Define the Steps #
+       ####################
+       steps:
+         - name: Output GitHub Context
+           env:
+             GITHUB_CONTEXT: ${{ toJson(github) }}
+           run: echo "$GITHUB_CONTEXT"
+         - name: Output Job Context
+           env:
+             JOB_CONTEXT: ${{ toJson(job) }}
+           run: echo "$JOB_CONTEXT"
+         - name: Output Step Context
+           env:
+             STEPS_CONTEXT: ${{ toJson(steps) }}
+           run: echo "$STEPS_CONTEXT"
+         - name: Output Runner Context
+           env:
+             RUNNER_CONTEXT: ${{ toJson(runner) }}
+           run: echo "$RUNNER_CONTEXT"
+         - name: Output Strategy Context
+           env:
+             STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+           run: echo "$STRATEGY_CONTEXT"
+         - name: Output Matrix Context
+           env:
+             MATRIX_CONTEXT: ${{ toJson(matrix) }}
+           run: echo "$MATRIX_CONTEXT"
+   ```
+
+3. Commit the file
+
+   ```bash
+   git commit -am 'Add context workflow'
+   ```
+
+4. Open a pull request
+5. In the pull request interface, select **Details** next to the **Output GitHub
+   Actions Contexts** status check
+6. Review the JSON contents of each context
+7. Merge the `Context` branch into the `main` branch, making sure to delete the
+   `Context` branch after doing so
+>>>>>>> Stashed changes
