@@ -1,98 +1,114 @@
-# Creating basic CI Github Action
+# Create a Continuous Integration (CI) Github Action
 
-This exercise will walk you through setting up *Continuous Integration* on your current repository.
-The objective of *Continuous Integration* is to achieve constant feedback on your changes to your code base and begin the process of testing and deploying your code base.
+This exercise will walk you through setting up _Continuous Integration (CI)_ on
+your repository. The objective of CI is to achieve constant feedback on changes
+to your codebase. This is the foundation to automatic testing and deployment of
+your codebase.
 
-**GitHub Actions** run off of workflow files that are managed and maintained in your repository. The first action we are going to "install" on our repository uses an open source Action called [Docker Build](https://github.com/docker/build-push-action). This action will try to build the current `Dockerfile` and see if it compiles successfully.
+GitHub Actions runs using workflow files in your repository. The first workflow
+we are going to create uses an open-source action called
+[`docker/build-push-action`](https://github.com/docker/build-push-action). This
+action will try to build the current `Dockerfile` and see if it compiles
+successfully.
 
-## Step 1: Add a GitHub Action workflow file
+1. Create a new branch named `CI`
 
-1. Create a new branch of code called `CI`
-1. Create a new file named `.github/workflows/ci.yml`
-1. Copy the code below to the newly created file:
+   ```bash
+   git checkout -b CI
+   ```
 
-    ```yaml
-    ---
-    ########
-    ########
-    ## CI ##
-    ########
-    ########
-    name: Continuous Integration
+2. In the root of the repository, create a new directory named `.github`
 
-    #
-    # Documentation:
-    # https://help.github.com/en/articles/workflow-syntax-for-github-actions
-    #
+   ```bash
+   mkdir .github
+   ```
 
-    #############################
-    # Start the job on all push #
-    #############################
-    # Don't need to run on push to master/main
-    on:
-      push:
-        branches-ignore:
-          - 'master'
-          - 'main'
+3. In the `.github` directory, create a new directory named `workflows`
 
-    ###############
-    # Set the Job #
-    ###############
-    jobs:
-      build:
-        # Name the Job
-        name: CI
-        # Set the agent to run on
-        runs-on: ubuntu-latest
-        ##################
-        # Load all steps #
-        ##################
-        steps:
-          ##########################
-          # Checkout the code base #
-          ##########################
-          - name: Checkout Code
-            uses: actions/checkout@v2
+   ```bash
+   mkdir .github/workflows
+   ```
 
-          ########################
-          # Setup Docker build X #
-          ########################
-          - name: Setup BuildX
-            uses: docker/setup-buildx-action@v1
+4. Create a new file named `.github/workflows/01-ci.yml` with the following
+   contents
 
-          ##############################
-          # Build the docker container #
-          ##############################
-          - name: Build Docker container
-            uses: docker/build-push-action@v2
-            with:
-              context: .
-              file: ./Dockerfile
-              build-args: |
-                BUILD_DATE=${{ env.BUILD_DATE }}
-                BUILD_REVISION=${{ github.sha }}
-                BUILD_VERSION=${{ github.sha }}
-              push: false
-    ```
+   ```yaml
+   ---
+   ########
+   ## CI ##
+   ########
+   name: Continuous Integration
 
-1. Commit the file.
+   # Documentation:
+   # https://help.github.com/en/articles/workflow-syntax-for-github-actions
 
-This workflow file is set up to run when a push is made to branches in the repository, unless they are pushed to the `main` or `master` branch. This is controlled by this section of the code:
+   #############################
+   # Start the job on push     #
+   # Don't run on push to main #
+   #############################
+   on:
+     push:
+       branches-ignore:
+         - 'main'
 
-```yaml
-    push:
-      branches-ignore:
-        - 'master'
-        - 'main'
-```
+   ##################
+   # Define the Job #
+   ##################
+   jobs:
+     build:
+       # Name the Job
+       name: CI
 
-When we push a change to a branch, the GitHub Action will clone the repository code base, and run the docker build against the changes.
+       # Set the platform to run on
+       runs-on: ubuntu-latest
 
-## Step 2: Running your GitHub Action
+       ####################
+       # Define the Steps #
+       ####################
+       steps:
+         #########################
+         # Checkout the Codebase #
+         #########################
+         - name: Checkout
+           uses: actions/checkout@v3
 
-1. Open a pull request with the `CI` branch into the `main` branch.
+         #######################
+         # Setup Docker BuildX #
+         #######################
+         - name: Setup Docker BuildX
+           uses: docker/setup-buildx-action@v2
 
-    In the pull request, you will see the GitHub Actions job running and its results. You can review the logs of the run and the steps it took by clicking on **Details** next to the GitHub Action. You can experiment with this Action, but making additional updates to the code and committing it.
+         ##############################
+         # Build the Docker Container #
+         ##############################
+         - name: Build Docker container
+           uses: docker/build-push-action@v4
+           with:
+             context: .
+             file: ./Dockerfile
+             build-args: |
+               BUILD_DATE=${{ env.BUILD_DATE }}
+               BUILD_REVISION=${{ github.sha }}
+               BUILD_VERSION=${{ github.sha }}
+             push: false
+   ```
 
-1. Merge the pull request.
+5. Commit the file
 
+   ```bash
+   git commit -am "Add CI workflow"
+   ```
+
+6. Open a pull request to merge the `CI` branch into the `main` branch
+
+   In the pull request, you will see the _Continuous Integration_ workflow
+   running and the results when it completes. You can review the logs of the run
+   and the steps it took by clicking on **Details** next to the action. You can
+   experiment with this action by making additional updates to the code and
+   committing it.
+
+7. Merge the pull request
+
+This workflow file is set up to run when a push is made to any branches in the
+repository except for `main`. When we push a change to a branch, the action will
+clone the repository code base and build the changes.
