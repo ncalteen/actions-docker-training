@@ -1,4 +1,7 @@
-- Create a new repo and make this repo an action and pull in the container and use it!
+# Reuse Local Actions
+
+- Create a new repo and make this repo an action and pull in the container and
+  use it!
 
 - You could create an `action.yml` on the root of repo with the following data
 
@@ -15,4 +18,5 @@ branding:
   color: 'white'
 ```
 
-- You can then open a new repo, create a worklfow, and point to this repo, and it will luanch the docker contrainer
+- You can then open a new repo, create a worklfow, and point to this repo, and
+  it will luanch the docker contrainer

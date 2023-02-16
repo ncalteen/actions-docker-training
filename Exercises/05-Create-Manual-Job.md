@@ -1,9 +1,12 @@
-# GitHub Manual Job
+# Create a Manual Job
 
-**GitHub Actions** allows you to be able to run manual jobs and pass the job inputs.
+**GitHub Actions** allows you to be able to run manual jobs and pass the job
+inputs.
 
-This allows the user to be able to set up jobs that run when they want to manually initiate them, and pass variables needed to complete the job.
-This gives the users more flexability on how they could semi-automate the deploy/release process.
+This allows the user to be able to set up jobs that run when they want to
+manually initiate them, and pass variables needed to complete the job. This
+gives the users more flexability on how they could semi-automate the
+deploy/release process.
 
 1. Create a branch called `manual-job`
 1. Create a file, `.github/workflows/manual-deployment.yml`
@@ -33,9 +36,9 @@ jobs:
   Deploy_Apps:
     runs-on: ubuntu-latest
     steps:
-    - run: |
-        echo "Running deployment of branch ${{ github.event.inputs.branch }}!"
-        echo "- Deploying the following Apps: ${{ github.event.inputs.app_list }}!"
+      - run: |
+          echo "Running deployment of branch ${{ github.event.inputs.branch }}!"
+          echo "- Deploying the following Apps: ${{ github.event.inputs.app_list }}!"
 ```
 
 1. Open a pull request and merge the `manual-job` branch into the `main` branch.

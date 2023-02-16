@@ -1,9 +1,11 @@
-# GitHub Dependent Job
+# Create a Dependent Job
 
-**GitHub Actions** allows you link jobs and make then dependent on the previous job outlined in the workflow.
+**GitHub Actions** allows you link jobs and make then dependent on the previous
+job outlined in the workflow.
 
-This allows the user to be able to set up jobs that have various parts that run  on different machines, or on the same machine.
-This gives the users more flexibility on how they could semi-automate the deploy/release process.
+This allows the user to be able to set up jobs that have various parts that run
+on different machines, or on the same machine. This gives the users more
+flexibility on how they could semi-automate the deploy/release process.
 
 1. Create a branch called `dependent-job`
 1. Create a file, `.github/workflows/dependent.yml`
@@ -45,4 +47,5 @@ jobs:
           echo "such test, much wow...";
 ```
 
-1. Open a pull request and merge the `dependent-job` branch into the `main` branch.
+1. Open a pull request and merge the `dependent-job` branch into the `main`
+   branch.

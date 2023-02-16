@@ -1,4 +1,4 @@
-# Create a Protected QA Branch
+# Create Protected Branches
 
 Many organizations follow different development models, such as
 [GitHub flow](https://docs.github.com/en/get-started/quickstart/github-flow) or

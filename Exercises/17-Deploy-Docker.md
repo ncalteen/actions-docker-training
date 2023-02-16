@@ -1,27 +1,34 @@
-# Deploy on push to `master` or `main`
+# Deploy a Docker Image
 
-In this session, we are going to be deploying the application to various production style environments. This will take the built **Docker** Container and deploy it to one or more of the various environments.
+In this session, we are going to be deploying the application to various
+production style environments. This will take the built **Docker** Container and
+deploy it to one or more of the various environments.
 
 ### Exercise: Deploy Docker images
 
-> **Note:** Before you add the code below, you will need to setup **Github Secrets** To help hold credentials and hidden endpoints.
+> **Note:** Before you add the code below, you will need to setup **Github
+> Secrets** To help hold credentials and hidden endpoints.
 
 - **DockerHub**
   - `DOCKERHUB_USERNAME` - Username to authenticate to DockerHub
   - `DOCKERHUB_PASSWORD` - Password to authenticate to DockerHub
 - **Github Container Registry**
   - `GCR_USERNAME` - Username to authenticate to GitHub
-  - `GCR_TOKEN` - GitHub Personal Access Token with access rights to container registry
+  - `GCR_TOKEN` - GitHub Personal Access Token with access rights to container
+    registry
 - **AWS**
   - `AWS_ACCESS_KEY_ID` - Access key id to authenticate to AWS
   - `AWS_SECRET_ACCESS_KEY` - Secret Access key to authenticate to AWS
   - `ECR_REGISTRY` - AWS ECR Registry to push container image
   - `ECR_REPOSITORY` - AWS ECR repository to push container image
+
 ---
+
 #### Deploy to DockerHub
 
 1. Create a new branch called `Deploy`
-1. Add the following file to your repository: `.github/workflows/deploy-prod-docker.yml`
+1. Add the following file to your repository:
+   `.github/workflows/deploy-prod-docker.yml`
 
 <details>
 <summary>Click here to add the file</summary>
@@ -159,7 +166,8 @@ jobs:
 #### Deploy to GitHub Container Registry
 
 1. Create a new branch called `Deploy`
-1. Add the following file to your repository: `.github/workflows/deploy-prod-gcr.yml`
+1. Add the following file to your repository:
+   `.github/workflows/deploy-prod-gcr.yml`
 
 <details>
 <summary>Click here to add the file</summary>
@@ -186,17 +194,21 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-
       # use checkout v3 action
       - uses: actions/checkout@v3
 
       # builds the docker image
       - name: Build image
-        run: docker build . --file Dockerfile --tag "${{ github.event.repository.name }}" --label "runnumber=${{ github.run_id }}"
+        run:
+          docker build . --file Dockerfile --tag "${{
+          github.event.repository.name }}" --label "runnumber=${{ github.run_id
+          }}"
 
       # log into registry
       - name: Log in to registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+        run:
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $
+          --password-stdin
 
       # Update deployment API
       - name: start deployment
@@ -223,7 +235,7 @@ jobs:
             })
             console.log('create', create)
             return create.data.number
-        
+
       ###########################################
       # Build and Push containers to registries #
       ###########################################
@@ -290,7 +302,8 @@ jobs:
 - Commit the code
 - Open Pull request & merge
 - Watch the failure take place
-- Fix line 84 by changing the `$IMAGE_NAME` variable reference to point to `${{ github.event.repository.name }}`
+- Fix line 84 by changing the `$IMAGE_NAME` variable reference to point to
+  `${{ github.event.repository.name }}`
 - Commit changes, open another pull request, and try again.
 - Delete the branch.
 
@@ -299,7 +312,8 @@ jobs:
 #### Deploy to AWS ECR
 
 1. Create a new branch called `Deploy`
-1. Add the following file to your repository: `.github/workflows/deploy-prod-aws.yml`
+1. Add the following file to your repository:
+   `.github/workflows/deploy-prod-aws.yml`
 
 <details>
 <summary>Click here to add the file</summary>

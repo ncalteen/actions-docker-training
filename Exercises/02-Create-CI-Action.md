@@ -1,4 +1,4 @@
-# Create a Continuous Integration (CI) Github Action
+# Create a Continuous Integration (CI) Action
 
 This exercise will walk you through setting up _Continuous Integration (CI)_ on
 your repository. The objective of CI is to achieve constant feedback on changes

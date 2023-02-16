@@ -1,4 +1,4 @@
-# Utilizing GitHub Deployment API
+# Use GitHub's Deployment API to Update Environments
 
 This exercise will walk you through utilizing the **Github Deployment API** on
 your current repository.

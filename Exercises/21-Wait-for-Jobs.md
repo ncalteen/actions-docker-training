@@ -1,6 +1,8 @@
-# Wait for step to complete Action
-You can use the following code snippet to add wait for completion of steps. 
-This will allow you to make decisions on where another step from another job has completed, and what you want to do from that event.
+# Add Dependencies Between Jobs
+
+You can use the following code snippet to add wait for completion of steps. This
+will allow you to make decisions on where another step from another job has
+completed, and what you want to do from that event.
 
 ```yaml
 - name: Wait for app build success
@@ -21,4 +23,5 @@ This will allow you to make decisions on where another step from another job has
 ```
 
 ### Linkage
+
 - [Wait for check](]https://github.com/fountainhead/action-wait-for-check)

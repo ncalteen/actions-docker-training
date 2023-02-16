@@ -1,4 +1,4 @@
-# Create the `Dockerfile`
+# Create a `Dockerfile`
 
 In this session, we are going to be deploying an application within a Docker
 container. Before we can deploy our app, we need to set up the foundation for

@@ -28,9 +28,6 @@ contents and structures in this repository.
 
 ### Task 2: Add Complexity to the Workflow
 
-These steps will be more informative if you adopt
-[GitHub Flow](https://docs.github.com/en/get-started/quickstart/github-flow).
-
 - [Step 3: Create a Protected Branches](./03-Create-Protected-Branches.md)
 - [Step 4: Create a Context Job](./04-Create-Context-Job.md)
 - [Step 5: Create a Manual Job](./05-Create-Manual-Job.md)
@@ -45,7 +42,7 @@ These steps will be more informative if you adopt
 
 ### Task 4: Continuous Testing (CT)
 
-- [Step 11: Create Continuous Testing (CT) Actions](./11-Create-CT-Actions.md)
+- [Step 11: Create a Continuous Testing (CT) Action](./11-Create-CT-Action.md)
 
 ### Task 5: Security Scaning
 
@@ -65,7 +62,7 @@ These steps will be more informative if you adopt
 
 ### (Optional) Using GitHub Actions Beyond CI/CT/CD
 
-- [Step 19: Use GitHub Actions to Create Issues](./19-Create-Issues.md)
+- [Step 19: Use GitHub Script to Create Issues](./19-Create-Issues.md)
 - [Step 20: Use GitHub's Deployment API to Update Environments](./20-Deployment-API.md)
 - [Step 21: (**Advanced**) Add Dependencies Between Jobs](./21-Wait-for-Jobs.md)
 - [Step 22: (**Advanced**) Split Jobs for Faster Workflows](./22-Split-Jobs.md)

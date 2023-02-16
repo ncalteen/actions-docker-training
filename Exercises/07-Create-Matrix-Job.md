@@ -1,9 +1,12 @@
-# GitHub Matrix Job
+# Create a Matrix Job
 
-**GitHub Actions** allows you create matrix jobs and make your job run multiple steps in parallel.
+**GitHub Actions** allows you create matrix jobs and make your job run multiple
+steps in parallel.
 
-This allows the user to be able to set up jobs that have various parts that run on different machines, or on the same machine at the same time.
-This gives the users more flexibility on how they could semi-automate the deploy/release process.
+This allows the user to be able to set up jobs that have various parts that run
+on different machines, or on the same machine at the same time. This gives the
+users more flexibility on how they could semi-automate the deploy/release
+process.
 
 1. Create a branch called `matrix-job`
 1. Create a file, `.github/workflows/matrix.yml`
@@ -29,13 +32,14 @@ jobs:
         tests: ['test1', 'test2', 'test3']
         os: [macos-latest, ubuntu-latest, windows-latest]
     steps:
-    - name: Matrix job ${{ matrix.tests }}
-      run:  |
-        echo "Running test: ${{ matrix.tests }}"
-        date
-        echo "Taking a quick nap..."
-        sleep 15
-        date
+      - name: Matrix job ${{ matrix.tests }}
+        run: |
+          echo "Running test: ${{ matrix.tests }}"
+          date
+          echo "Taking a quick nap..."
+          sleep 15
+          date
 ```
 
-1. Open a pull request and merge the `dependent-job` branch into the `main` branch.
+1. Open a pull request and merge the `dependent-job` branch into the `main`
+   branch.

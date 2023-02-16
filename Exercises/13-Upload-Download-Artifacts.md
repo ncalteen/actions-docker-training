@@ -1,13 +1,19 @@
-# Uploading and Downloading build artifacts on Github Workflow
+# Upload and Download Build Artifacts
 
-- If your job produces a build artifact that users need to view, or need to be passed to another build machine, the **Github Actions** `upload` and `download` Action can help with this process.
+- If your job produces a build artifact that users need to view, or need to be
+  passed to another build machine, the **Github Actions** `upload` and
+  `download` Action can help with this process.
 
 ### Exercise: Add Upload and Download
 
-1. Add the following code to your CI build pipeline, and it will then start publishing the artifact once the step has completed.
-**Note:** You can copy and paste the whole snippet below into your pipeline. Notice the addional steps to upload and download the artifact.
+1. Add the following code to your CI build pipeline, and it will then start
+   publishing the artifact once the step has completed. **Note:** You can copy
+   and paste the whole snippet below into your pipeline. Notice the addional
+   steps to upload and download the artifact.
 1. Create a new branch called `Artifacts`
-1. Copy and paste the following code snippet into one of your working CI workflow file:
+1. Copy and paste the following code snippet into one of your working CI
+   workflow file:
+
 ```yaml
 ---
 ########
@@ -94,7 +100,7 @@ jobs:
       #######################
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-      
+
       ###############################################
       # Download the artifact from GitHub Artifacts #
       ###############################################
@@ -112,8 +118,11 @@ jobs:
           docker load --input /tmp/myimage.tar
           docker image ls -a
 ```
-> **Note:** Please update the path to an artifact that was created in the build process.
+
+> **Note:** Please update the path to an artifact that was created in the build
+> process.
 
 ### Linkage
+
 - [Upload Artifact](https://github.com/actions/upload-artifact)
 - [Download Artifact](https://github.com/actions/download-artifact)

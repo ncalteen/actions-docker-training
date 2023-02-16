@@ -1,27 +1,35 @@
-# Deploy Release
+# Deploy a Release Image
 
-In this session, we are going to be deploying the application to various production style environments. This will take the built **Docker** Container and deploy it to one or more of the various environments. This deployment is set to run only when a **GitHub Release** is created.
+In this session, we are going to be deploying the application to various
+production style environments. This will take the built **Docker** Container and
+deploy it to one or more of the various environments. This deployment is set to
+run only when a **GitHub Release** is created.
 
 ### Exercise: Deploy Release images
 
-**Note:** Before you add the code below, you will need to setup **Github Secrets** To help hold credentials and hidden endpoints.
+**Note:** Before you add the code below, you will need to setup **Github
+Secrets** To help hold credentials and hidden endpoints.
 
 - **DockerHub**
   - `DOCKERHUB_USERNAME` - Username to authenticate to DockerHub
   - `DOCKERHUB_PASSWORD` - Password to authenticate to DockerHub
 - **Github Container Registry**
   - `GCR_USERNAME` - Username to authenticate to GitHub
-  - `GCR_TOKEN` - GitHub Personal Access Token with access rights to container registry
+  - `GCR_TOKEN` - GitHub Personal Access Token with access rights to container
+    registry
 - **AWS**
   - `AWS_ACCESS_KEY_ID` - Access key id to authenticate to AWS
   - `AWS_SECRET_ACCESS_KEY` - Secret Access key to authenticate to AWS
   - `ECR_REGISTRY` - AWS ECR Registry to push container image
   - `ECR_REPOSITORY` - AWS ECR repository to push container image
+
 ---
+
 #### Deploy Release to DockerHub
 
 1. Create a new branch called `Deploy`
-1. Add the following file to your repository: `.github/workflows/deploy-prod-docker.yml`
+1. Add the following file to your repository:
+   `.github/workflows/deploy-prod-docker.yml`
 
 <details>
 <summary>Click here to add the file </summary>
@@ -158,7 +166,8 @@ jobs:
 #### Deploy Release to Github Container Registry
 
 1. Create a new branch called `Deploy`
-1. Add the following file to your repository: `.github/workflows/deploy-prod-gcr.yml`
+1. Add the following file to your repository:
+   `.github/workflows/deploy-prod-gcr.yml`
 
 <details>
 <summary>Click here to add the file </summary>
@@ -230,7 +239,7 @@ jobs:
             })
             console.log('create', create)
             return create.data.number
-  
+
       ########################################
       # Convert repository name to lowercase #
       ########################################
@@ -303,7 +312,8 @@ jobs:
 #### Deploy Release to AWS ECR
 
 1. Create a new branch called `Deploy`
-1. Add the following file to your repository: `.github/workflows/deploy-prod-aws.yml`
+1. Add the following file to your repository:
+   `.github/workflows/deploy-prod-aws.yml`
 
 <details>
 <summary>Click here to add the file</summary>
