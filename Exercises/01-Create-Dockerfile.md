@@ -3,7 +3,7 @@
 In this session, we are going to be deploying an application within a Docker
 container. Before we can deploy our app, we need to set up the foundation for
 our deployment pipeline. In this demo, we will use
-[`docker/github-actions`](https://hub.docker.com/r/docker/github-actions) from
+[`myoung34/github-runner`](https://hub.docker.com/r/myoung34/github-runner) from
 DockerHub as our base image, however you can replace this with any image of your
 choosing.
 
