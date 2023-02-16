@@ -74,5 +74,7 @@ that certain jobs will not start until others complete successfully.
 
    In the pull request, you will see the _Dependent Jobs_ workflow running and
    the results when it completes. You can review the logs of the run and the
-   steps it took by selecting **Details** next to the action. You can experiment
-   with this action by making additional updates to the code and committing it.
+   steps it took by selecting **Details** next to the action. You will see that,
+   unlike other workflows you created, the jobs do not run at the same time.
+   Instead, the `build` job only starts once `setup` completes, and the `test`
+   job only starts once `build` completes.
