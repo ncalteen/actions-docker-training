@@ -1,128 +1,123 @@
 # Upload and Download Build Artifacts
 
-- If your job produces a build artifact that users need to view, or need to be
-  passed to another build machine, the **Github Actions** `upload` and
-  `download` Action can help with this process.
+If your project produces build artifact(s) that are needed by other projects or
+users, the
+[`actions/upload-artifact`](https://github.com/actions/upload-artifact) and
+[`actions/download-artifact`](https://github.com/actions/download-artifact)
+actions can help with this process.
 
-### Exercise: Add Upload and Download
+In this exercise, we will modify our existing CI workflow to upload the
+container image. Then, we will create a new workflow to download the container
+image and load it into the Docker service in the action's runtime.
 
-1. Add the following code to your CI build pipeline, and it will then start
-   publishing the artifact once the step has completed. **Note:** You can copy
-   and paste the whole snippet below into your pipeline. Notice the addional
-   steps to upload and download the artifact.
-1. Create a new branch called `Artifacts`
-1. Copy and paste the following code snippet into one of your working CI
-   workflow file:
+1. Create a branch named `artifacts`
 
-```yaml
----
-########
-########
-## CI ##
-########
-########
-name: Continuous Integration
+   ```bash
+   git checkout -b artifacts
+   ```
 
-#
-# Documentation:
-# https://help.github.com/en/articles/workflow-syntax-for-github-actions
-#
+2. In the `.github/workflows/` directory, open the file named `ci.yml` and
+   update it to the following contents
 
-#############################
-# Start the job on all push #
-#############################
-# Don't need to run on push to master/main
-on:
-  push:
-    branches-ignore:
-      - 'master'
-      - 'main'
+   ```yaml
+   name: Continuous Integration
 
-###############
-# Set the Job #
-###############
-jobs:
-  build:
-    # Name the Job
-    name: CI
-    # Set the agent to run on
-    runs-on: ubuntu-latest
-    ##################
-    # Load all steps #
-    ##################
-    steps:
-      ##########################
-      # Checkout the code base #
-      ##########################
-      - name: Checkout Code
-        uses: actions/checkout@v2
+   on:
+     # Start the job on push
+     push:
+       # Don't run on push to main
+       branches-ignore:
+         - 'main'
 
-      ########################
-      # Setup Docker build X #
-      ########################
-      - name: Setup BuildX
-        uses: docker/setup-buildx-action@v1
+   jobs:
+     build:
+       # Name the job
+       name: CI
 
-      ##############################
-      # Build the docker container #
-      ##############################
-      - name: Build Docker container
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./Dockerfile
-          build-args: |
-            BUILD_DATE=${{ env.BUILD_DATE }}
-            BUILD_REVISION=${{ github.sha }}
-            BUILD_VERSION=${{ github.sha }}
-          push: false
-          tags: super-cool-image:latest
-          outputs: type=docker,dest=/tmp/myimage.tar
+       # Set the platform to run on
+       runs-on: ubuntu-latest
 
-      ###########################################
-      # Upload the artifact to the workflow run #
-      ###########################################
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: myimage
-          path: /tmp/myimage.tar
+       # Define the steps
+       steps:
+         # Checkout the codebase
+         - name: Checkout
+           uses: actions/checkout@v3
 
-  #############################################
-  # Second build job to ingest built artifact #
-  #############################################
-  ConsumeContainer:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      #######################
-      # Setup docker buildx #
-      #######################
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+         # Setup Docker BuildX
+         - name: Setup Docker BuildX
+           uses: docker/setup-buildx-action@v2
 
-      ###############################################
-      # Download the artifact from GitHub Artifacts #
-      ###############################################
-      - name: Download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: myimage
-          path: /tmp
+         # Build the Docker container
+         - name: Build Docker Container
+           uses: docker/build-push-action@v4
+           with:
+             context: .
+             file: ./Dockerfile
+             build-args: |
+               BUILD_DATE=${{ env.BUILD_DATE }}
+               BUILD_REVISION=${{ github.sha }}
+               BUILD_VERSION=${{ github.sha }}
+             push: false
+             tags: super-cool-image:latest
+             outputs: type=docker,dest=/tmp/myimage.tar
 
-      #########################
-      # Load the docker image #
-      #########################
-      - name: Load image
-        run: |
-          docker load --input /tmp/myimage.tar
-          docker image ls -a
-```
+         # Upload the artifact
+         - name: Upload Artifact
+           uses: actions/upload-artifact@v3
+           with:
+             name: myimage
+             path: /tmp/myimage.tar
+   ```
 
-> **Note:** Please update the path to an artifact that was created in the build
-> process.
+3. In the `.github/workflows/` directory, create a file named `download.yml`
+   with the following contents
 
-### Linkage
+   ```yaml
+   name: Download Container from CI Workflow
 
-- [Upload Artifact](https://github.com/actions/upload-artifact)
-- [Download Artifact](https://github.com/actions/download-artifact)
+   on:
+     # Start the job on completion of the CI workflow
+     workflow_run:
+       workflows:
+         - CI
+
+   jobs:
+     download-container:
+       # Set the platform to run on
+       runs-on: ubuntu-latest
+
+       # Define the steps
+       steps:
+         # Setup Docker BuildX
+         - name: Setup Docker BuildX
+           uses: docker/setup-buildx-action@v2
+
+         # Download the artifact
+         - name: Download artifact
+           uses: actions/download-artifact@v2
+           with:
+             name: myimage
+             path: /tmp
+
+         # Load the Docker image
+         - name: Load image
+           run: |
+             docker load --input /tmp/myimage.tar
+             docker image ls -a
+   ```
+
+4. Commit the file
+
+   ```bash
+   git commit -am 'Add upload/download workflows'
+   ```
+
+5. Open a pull request and merge the `artifacts` branch into the `main` branch,
+   making sure to delete the `artifacts` branch after doing so
+
+   In the pull request, you will see the _Continuous Integration_ workflow
+   running and the results when it completes. Once it completes, the _Download
+   Container from CI Workflow_ will start. You can review the logs of the run
+   and the steps it took by selecting **Details** next to the action. You can
+   experiment with this action by making additional updates to the code and
+   committing it.
