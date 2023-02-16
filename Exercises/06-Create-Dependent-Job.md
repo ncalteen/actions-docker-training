@@ -10,10 +10,8 @@ that certain jobs will not start until others complete successfully.
 > skipped.
 
 1. Create a branch named `dependent`
-2. Create a file named `.github/workflows/dependent.yml` with the following
-   contents
-
-   > **:warning: Note:** This job is primarily used for manual triggers.
+2. In the `.github/workflows/` directory, create a file named `dependent.yml`
+   with the following contents
 
    ```yaml
    name: Dependent Jobs

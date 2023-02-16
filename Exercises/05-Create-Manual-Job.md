@@ -10,8 +10,8 @@ workflows for situations where human intervention is needed.
    git checkout -b manual
    ```
 
-2. Create a file named `.github/workflows/manual.yml` with the following
-   contents
+2. In the `.github/workflows/` directory, create a file named `manual.yml` with
+   the following contents
 
    > **:warning: NOTE:** This job is primarily used for manual triggers.
 

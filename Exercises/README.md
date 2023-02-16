@@ -33,7 +33,7 @@ contents and structures in this repository.
 - [Step 5: Create a Manual Job](./05-Create-Manual-Job.md)
 - [Step 6: Create a Dependent Job](./06-Create-Dependent-Job.md)
 - [Step 7: Create a Matrix Job](./07-Create-Matrix-Job.md)
-- [Step 8: Create a Reusable Workflow](./08-Create-Reusable-Workflow)
+- [Step 8: Create a Reusable Action](./08-Create-Reusable-Action)
 
 ### Task 3: Dependency Management
 

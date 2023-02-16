@@ -11,10 +11,8 @@ values.
    git checkout -b matrix
    ```
 
-2. Create a file named `.github/workflows/matrix.yml` with the following
-   contents
-
-   > **:warning: Note:** This job is primarily used for manual triggers.
+2. In the `.github/workflows/` directory, create a file named `matrix.yml` with
+   the following contents
 
    ```yaml
    name: Matrix Build

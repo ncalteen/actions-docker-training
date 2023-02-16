@@ -12,11 +12,8 @@ itself and any job(s) or step(s) it defines.
    git checkout -b context
    ```
 
-2. Create a file named `.github/workflows/context.yml` with the following
-   contents
-
-   > **:warning: Note:** This job is primarily used for debugging to show
-   > context information in a running job.
+2. In the `.github/workflows/` directory, create a file named `context.yml` with
+   the following contents
 
    ```yaml
    name: Output GitHub Actions Contexts

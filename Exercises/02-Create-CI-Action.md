@@ -29,8 +29,8 @@ successfully.
    mkdir .github/workflows
    ```
 
-4. Create a new file named `.github/workflows/ci.yml` with the following
-   contents
+4. In the `.github/workflows/` directory, create a file named `ci.yml` with the
+   following contents
 
    ```yaml
    name: Continuous Integration
