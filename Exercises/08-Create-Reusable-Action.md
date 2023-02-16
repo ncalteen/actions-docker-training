@@ -103,7 +103,7 @@ workflow that uses the custom action.
 4. Open a pull request and merge the `centralized` branch into the `main`
    branch, making sure to delete the `centralized` branch after doing so
 
-   In the pull request, you will see the _centralized_ workflow running and the
-   results when it completes. You can review the logs of the run and the steps
-   it took by selecting **Details** next to the action. You can experiment with
-   this action by making additional updates to the code and committing it.
+   In the pull request, you will see the _Centralized Action_ workflow running
+   and the results when it completes. You can review the logs of the run and the
+   steps it took by selecting **Details** next to the action. You can experiment
+   with this action by making additional updates to the code and committing it.

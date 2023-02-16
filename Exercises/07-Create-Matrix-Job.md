@@ -58,7 +58,7 @@ values.
 4. Open a pull request and merge the `matrix` branch into the `main` branch,
    making sure to delete the `matrix` branch after doing so
 
-   In the pull request, you will see the _matrix_ workflow running and the
+   In the pull request, you will see the _Matrix Build_ workflow running and the
    results when it completes. You will see that 9 jobs are created, one for each
    combination of `test` and `os` from the matrix. You can review the logs of
    the run and the steps it took by selecting **Details** next to the action.
