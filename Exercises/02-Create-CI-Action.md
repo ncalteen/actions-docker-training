@@ -84,7 +84,7 @@ successfully.
 
    In the pull request, you will see the _Continuous Integration_ workflow
    running and the results when it completes. You can review the logs of the run
-   and the steps it took by clicking on **Details** next to the action. You can
+   and the steps it took by selecting **Details** next to the action. You can
    experiment with this action by making additional updates to the code and
    committing it.
 
