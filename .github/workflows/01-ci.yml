@@ -1,0 +1,59 @@
+---
+########
+## CI ##
+########
+name: Continuous Integration
+
+# Documentation:
+# https://help.github.com/en/articles/workflow-syntax-for-github-actions
+
+####################################
+# Start the job on push            #
+# Don't run on push to master/main #
+####################################
+on:
+  push:
+    branches-ignore:
+      - 'master'
+      - 'main'
+
+##################
+# Define the Job #
+##################
+jobs:
+  build:
+    # Name the Job
+    name: CI
+
+    # Set the platform to run on
+    runs-on: ubuntu-latest
+
+    ####################
+    # Define the steps #
+    ####################
+    steps:
+      ##########################
+      # Checkout the code base #
+      ##########################
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      #######################
+      # Setup Docker BuildX #
+      #######################
+      - name: Setup Docker BuildX
+        uses: docker/setup-buildx-action@v2
+
+      ##############################
+      # Build the Docker Container #
+      ##############################
+      - name: Build Docker container
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          build-args: |
+            BUILD_DATE=${{ env.BUILD_DATE }}
+            BUILD_REVISION=${{ github.sha }}
+            BUILD_VERSION=${{ github.sha }}
+          push: false

@@ -4,7 +4,7 @@
 
 # This is a copy of the GitHub Action runner. You can replace this base
 # image with a base image of your choosing.
-FROM docker/github-actions:latest
+FROM myoung34/github-runner:latest
 
 #########################################
 # Variables #
