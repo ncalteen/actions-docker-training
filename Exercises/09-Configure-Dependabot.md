@@ -75,6 +75,12 @@ is up to date and free of known security vulnerabilities.
 4. Open a pull request and merge the `dependabot` branch into the `main` branch,
    making sure to delete the `dependabot` branch after doing so
 
+## View Dependabot Alerts
+
+Now that Dependabot is configured for your repository, it will scan the codebase
+and open pull requests for any known security vulnerabilities. Several files are
+included in this repository that will generate Dependabot alerts.
+
 ## Additional Links
 
 - [Dependabot configuration](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file)
