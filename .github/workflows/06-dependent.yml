@@ -1,0 +1,45 @@
+name: Dependent Jobs
+
+on:
+  # Start the job on push
+  push:
+    # Don't run on push to main
+    branches-ignore:
+      - main
+
+jobs:
+  setup:
+    # Set the platform to run on
+    runs-on: ubuntu-latest
+
+    # Define the steps
+    steps:
+      - run: |
+          sudo apt-get install git-lfs;
+          git-lfs --version
+
+  build:
+    # Depends on the setup job
+    needs: setup
+
+    # Set the platform to run on
+    runs-on: ubuntu-latest
+
+    # Define the steps
+    steps:
+      - run: |
+          echo "Hello, World!";
+          echo "Goodnight, Moon!";
+
+  test:
+    # Depends on the build job
+    needs: build
+
+    # Set the platform to run on
+    runs-on: ubuntu-latest
+
+    # Define the steps
+    steps:
+      - run: |
+          echo "This is the test step!";
+          echo "We should be running tests...";
