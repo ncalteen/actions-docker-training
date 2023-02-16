@@ -29,6 +29,8 @@ Git flow, you can use branch protection to ensure:
 - Merging into `release` requires all status checks to pass **and** at least one
   review
 
+> **NOTE:** For the sake of brevity, we won't use Git flow in this training.
+
 1. Create a new branch called `release` and push it to GitHub.com
 
    ```bash
