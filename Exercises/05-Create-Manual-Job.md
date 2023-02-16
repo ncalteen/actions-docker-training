@@ -62,3 +62,11 @@ workflows for situations where human intervention is needed.
 
 4. Open a pull request and merge the `Manual` branch into the `main` branch,
    making sure to delete the `Manual` branch after doing so
+5. Navigate to the **Actions** tab of your repository
+6. Select the **Manual Deployment** action
+7. Select **Run workflow**
+8. Update any input values and select **Run workflow**
+9. Select the workflow run that appears
+10. Select the **manual-deployment** job
+11. Expand the steps to view the logs and verify the inputs were passed in
+    correctly
