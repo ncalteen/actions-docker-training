@@ -60,18 +60,15 @@ changes to the code and run a linter against it to ensure code sanity.
    git commit -am 'Add linting workflow'
    ```
 
-When we push a change to a branch, the GitHub Action will clone the repository
-code base, and run the Super Linter against the changes.
+4. Open a pull request to merge the `ct` branch into the `main` branch
 
-## Running your GitHub Action
+   In the pull request, you will see the _CT_ workflow running and the results
+   when it completes. You can review the logs of the run and the steps it took
+   by selecting **Details** next to the action. You can experiment with this
+   action by making additional updates to the code and committing it.
 
-1. Remove super linter to get checks passing.
+   For now, we will ignore Super Linter and merge the pull request.
 
-1. Open a pull request with the `CT` branch into the `main` branch.
-
-   In the pull request, you will see the GitHub Actions job running and its
-   results. You can review the logs of the run and the steps it took by clicking
-   on **Details** next to the GitHub Action. You can experiment with this
-   Action, but making additional updates to the code and committing it.
-
-1. Merge the pull request.
+5. Select **Merge pull request**
+6. Select **Close pull request**
+7. Select **Delete branch**
