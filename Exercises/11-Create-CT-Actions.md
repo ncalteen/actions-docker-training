@@ -62,10 +62,10 @@ changes to the code and run a linter against it to ensure code sanity.
 
 4. Open a pull request to merge the `ct` branch into the `main` branch
 
-   In the pull request, you will see the _CT_ workflow running and the results
-   when it completes. You can review the logs of the run and the steps it took
-   by selecting **Details** next to the action. You can experiment with this
-   action by making additional updates to the code and committing it.
+   In the pull request, you will see the _Continuous Testing_ workflow running
+   and the results when it completes. You can review the logs of the run and the
+   steps it took by selecting **Details** next to the action. You can experiment
+   with this action by making additional updates to the code and committing it.
 
    For now, we will ignore Super Linter and merge the pull request.
 
