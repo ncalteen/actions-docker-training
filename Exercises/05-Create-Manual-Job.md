@@ -18,14 +18,10 @@ workflows for situations where human intervention is needed.
    ```yaml
    name: Manual Deployment
 
-   ###################################
-   # Start the job on manual trigger #
-   ###################################
    on:
+     # Start the job on manual trigger
      workflow_dispatch:
-       #####################
-       # Define the Inputs #
-       #####################
+       # Define the inputs
        inputs:
          branch:
            description: 'Branch to deploy'
@@ -36,18 +32,13 @@ workflows for situations where human intervention is needed.
            required: true
            default: 'App1,App2'
 
-   ##################
-   # Define the Job #
-   ##################
+   # Define the job
    jobs:
-     # Name the Job
      manual-deployment:
        # Set the platform to run on
        runs-on: ubuntu-latest
 
-       ####################
-       # Define the Steps #
-       ####################
+       # Define the steps
        steps:
          - run: |
              echo "Running deployment of branch ${{ github.event.inputs.branch }}!"

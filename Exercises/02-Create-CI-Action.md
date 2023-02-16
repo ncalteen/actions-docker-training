@@ -35,49 +35,33 @@ successfully.
    ```yaml
    name: Continuous Integration
 
-   # Documentation:
-   # https://help.github.com/en/articles/workflow-syntax-for-github-actions
-
-   #############################
-   # Start the job on push     #
-   # Don't run on push to main #
-   #############################
    on:
+     # Start the job on push
      push:
+       # Don't run on push to main
        branches-ignore:
          - 'main'
 
-   ##################
-   # Define the Job #
-   ##################
    jobs:
      build:
-       # Name the Job
+       # Name the job
        name: CI
 
        # Set the platform to run on
        runs-on: ubuntu-latest
 
-       ####################
-       # Define the Steps #
-       ####################
+       # Define the steps
        steps:
-         #########################
-         # Checkout the Codebase #
-         #########################
+         # Checkout the codebase
          - name: Checkout
            uses: actions/checkout@v3
 
-         #######################
-         # Setup Docker BuildX #
-         #######################
+         # Setup Docker BuildX
          - name: Setup Docker BuildX
            uses: docker/setup-buildx-action@v2
 
-         ##############################
-         # Build the Docker Container #
-         ##############################
-         - name: Build Docker container
+         # Build the Docker container
+         - name: Build Docker Container
            uses: docker/build-push-action@v4
            with:
              context: .

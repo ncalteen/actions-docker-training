@@ -21,27 +21,19 @@ itself and any job(s) or step(s) it defines.
    ```yaml
    name: Output GitHub Actions Contexts
 
-   #############################
-   # Start the job on push     #
-   # Don't run on push to main #
-   #############################
    on:
+     # Start the job on push
      push:
+       # Don't run on push to main
        branches-ignore:
          - main
 
-   ##################
-   # Define the Job #
-   ##################
    jobs:
-     # Name the Job
      context-info:
        # Set the platform to run on
        runs-on: ubuntu-latest
 
-       ####################
-       # Define the Steps #
-       ####################
+       # Define the steps
        steps:
          - name: Output GitHub Context
            env:
