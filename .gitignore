@@ -1,3 +1,5 @@
 # dont save ruby binaries
 *.gem
 /bundle
+
+Dockerfile
