@@ -99,15 +99,14 @@ successfully.
    git commit -am "Add CI workflow"
    ```
 
-6. Open a pull request to merge the `CI` branch into the `main` branch
+6. Open a pull request and merge the `Docker` branch into the `main` branch,
+   making sure to delete the `Docker` branch after doing so
 
    In the pull request, you will see the _Continuous Integration_ workflow
    running and the results when it completes. You can review the logs of the run
    and the steps it took by clicking on **Details** next to the action. You can
    experiment with this action by making additional updates to the code and
    committing it.
-
-7. Merge the pull request
 
 This workflow file is set up to run when a push is made to any branches in the
 repository except for `main`. When we push a change to a branch, the action will
