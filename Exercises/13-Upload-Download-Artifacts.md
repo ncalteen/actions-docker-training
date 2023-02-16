@@ -113,7 +113,28 @@ image and load it into the Docker service in the action's runtime.
    ```
 
 5. Open a pull request and merge the `artifacts` branch into the `main` branch,
-   making sure to delete the `artifacts` branch after doing so
+   making sure **not** to delete the `artifacts` branch after doing so
+6. Synchronize your local repository with the remote
+
+   ```bash
+   git pull
+   ```
+
+7. In the `library/` directory, open the file named `entrypoint.sh` and add the
+   following line to the bottom
+
+   ```bash
+   echo "Goodbye from the container!"
+   ```
+
+8. Commit the file
+
+   ```bash
+   git commit -am 'Update Dockerfile'
+   ```
+
+9. Open a pull request and merge the `artifacts` branch into the `main` branch,
+   making sure **not** to delete the `artifacts` branch after doing so
 
    In the pull request, you will see the _Continuous Integration_ workflow
    running and the results when it completes. Once it completes, the _Download
