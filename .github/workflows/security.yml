@@ -1,0 +1,36 @@
+name: CodeQL Security Analysis
+
+on:
+  # Start the job on push
+  push:
+    # Don't run on push to main
+    branches-ignore:
+      - 'main'
+
+jobs:
+  scan:
+    # Name the job
+    name: CodeQL Analysis
+
+    # Set the platform to run on
+    runs-on: ubuntu-latest
+
+    # Define the steps
+    steps:
+      # Checkout the codebase
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          # Full git history is needed to get a
+          # proper list of changed files
+          fetch-depth: 0
+
+      # Initialize CodeQL
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: python
+
+      # Run CodeQL analysis
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
