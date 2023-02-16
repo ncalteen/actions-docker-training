@@ -87,14 +87,11 @@ included in this repository that will generate Dependabot alerts.
 1. Navigate to the **Pull requests** tab of your repository
 2. Select any open pull request with the `dependencies` label
 3. Review the release notes and commit information for the dependency
-4. Merge the pull request
-5. Update your local repository
 
-   ```bash
-   git pull
-   ```
-
-Feel free to repeat this process for any other open Dependabot pull requests!
+Feel free to repeat this process for any other open Dependabot pull requests! In
+the next exercise, we will lock our project dependencies to specific versions.
+This will prevent Dependabot from opening pull requests for minor and patch
+updates that are outside of the specified version ranges.
 
 ## Additional Links
 

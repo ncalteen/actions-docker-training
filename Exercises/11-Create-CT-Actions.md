@@ -1,71 +1,51 @@
 # Create a Continuous Testing (CT) Action
 
-This exercise will walk you through setting up _Continuous Testing_ on your
-current repository.
+This exercise will walk you through setting up _Continuous Testing (CT)_ on your
+repository. The objective of CT is to quickly get feedback on changes to your
+codebase.
 
-The objective of _Continuous Testing_ is to achieve constant feedback on your
-changes to your code base and enable the process of testing your code base.
-
-**GitHub Actions** run off of workflow files that are managed and maintained in
-your repository. The action we are going to "install" on our repository uses an
-open source Action called the
+The action we are use in our workflow is the open-source
 [Super Linter](https://github.com/github/super-linter). This action will review
 changes to the code and run a linter against it to ensure code sanity.
 
-## Add a GitHub Action workflow file
+1. Create a branch named `ct`
 
-1. Create a new branch of code called `CT`
-1. Create a new file named `.github/workflows/ct.yml`
-1. Copy the code below to the newly created file:
+   ```bash
+   git checkout -b ct
+   ```
+
+2. In the `.github/workflows/` directory, create a file named `ct.yml` with the
+   following contents
 
    ```yaml
-   ########
-   ########
-   ## CT ##
-   ########
-   ########
    name: Continuous Testing
 
-   #
-   # Documentation:
-   # https://help.github.com/en/articles/workflow-syntax-for-github-actions
-   #
-
-   #############################
-   # Start the job on all push #
-   #############################
-   # Don't need to run on push to master/main
    on:
+     # Start the job on push
      push:
+       # Don't run on push to main
        branches-ignore:
-         - 'master'
          - 'main'
 
-   ###############
-   # Set the Job #
-   ###############
    jobs:
      build:
-       # Name the Job
+       # Name the job
        name: CT
-       # Set the agent to run on
+
+       # Set the platform to run on
        runs-on: ubuntu-latest
-       ##################
-       # Load all steps #
-       ##################
+
+       # Define the steps
        steps:
-         ##########################
-         # Checkout the code base #
-         ##########################
-         - name: Checkout Code
+         # Checkout the codebase
+         - name: Checkout
            uses: actions/checkout@v3
            with:
-             # Full git history is needed to get a proper list of changed files within `super-linter`
+             # Full git history is needed to get a proper
+             # list of changed files within `super-linter`
              fetch-depth: 0
 
-         ################################
-         # Run Linter against code base #
-         ################################
+         # Run Super Linter
          - name: Lint Code Base
            uses: github/super-linter@v4
            env:
@@ -74,18 +54,11 @@ changes to the code and run a linter against it to ensure code sanity.
              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
    ```
 
-1. Commit the file.
+3. Commit the file
 
-This workflow file is set up to run when a push is made to branches in the
-repository, unless they are pushed to the `main` or `master` branch. This is
-controlled by this section of the code:
-
-```yaml
-push:
-  branches-ignore:
-    - 'master'
-    - 'main'
-```
+   ```bash
+   git commit -am 'Add linting workflow'
+   ```
 
 When we push a change to a branch, the GitHub Action will clone the repository
 code base, and run the Super Linter against the changes.

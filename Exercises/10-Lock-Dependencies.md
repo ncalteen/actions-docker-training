@@ -6,6 +6,16 @@ This also is a great coding practice as it allows users to be able to build the
 code in the same state it was generated. This will result in consistent builds
 and less issues with versioning in the future.
 
+In the previous exercise, Dependabot generated several pull requests for
+outdated dependencies. In this exercise, we will lock our dependencies to
+specific versions. Dependabot will use this information to decide what pull
+requests to open in the future. Additionally, pull requests that have already
+been opened will be closed if the suggested versions are outside of the range
+specified in the lock file.
+
+> **:warning: NOTE:** It may take some time for Dependabot to scan your
+> repository and generate pull requests. Please be patient!
+
 ## Add Package Lock Files
 
 The format and content of lock files varies by programming language and package
@@ -541,3 +551,12 @@ several languages.
 
 4. Open a pull request and merge the `ruby-deps` branch into the `main` branch,
    making sure to delete the `ruby-deps` branch after doing so
+
+## Check for Dependabot Updates
+
+After you have locked your dependencies, Dependabot will evaluate any pull
+requests it opened to see if they are still valid. If not, they will be closed
+automatically.
+
+1. Navigate to the **Pull requests** tab of your repository
+2. Select the **Closed** option to see what pull requests Dependabot closed
