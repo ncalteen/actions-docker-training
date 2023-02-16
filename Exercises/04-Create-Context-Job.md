@@ -12,7 +12,7 @@ itself and any job(s) or step(s) it defines.
    git checkout -b Context
    ```
 
-2. Create a file named `.github/workflows/02-context.yml` with the following
+2. Create a file named `.github/workflows/04-context.yml` with the following
    contents
 
    > **:warning: Note:** This job is primarily used for debugging to show

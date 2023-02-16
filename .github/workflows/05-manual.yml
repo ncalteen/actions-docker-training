@@ -1,0 +1,36 @@
+name: Manual Deployment
+
+###################################
+# Start the job on manual trigger #
+###################################
+on:
+  workflow_dispatch:
+    #####################
+    # Define the Inputs #
+    #####################
+    inputs:
+      branch:
+        description: 'Branch to deploy'
+        required: true
+        default: 'develop'
+      app_list:
+        description: 'Comma-separated list of apps to deploy'
+        required: true
+        default: 'App1,App2'
+
+##################
+# Define the Job #
+##################
+jobs:
+  # Name the Job
+  manual-deployment:
+    # Set the platform to run on
+    runs-on: ubuntu-latest
+
+    ####################
+    # Define the Steps #
+    ####################
+    steps:
+      - run: |
+          echo "Running deployment of branch ${{ github.event.inputs.branch }}!"
+          echo "- Deploying the following Apps: ${{ github.event.inputs.app_list }}!"

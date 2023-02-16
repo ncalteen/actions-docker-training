@@ -1,44 +1,64 @@
 # Create a Manual Job
 
-**GitHub Actions** allows you to be able to run manual jobs and pass the job
-inputs.
+GitHub Actions allows you to run jobs manually and pass in any needed inputs.
+This gives developers the flexability to incorporate manual steps into their
+workflows for situations where human intervention is needed.
 
-This allows the user to be able to set up jobs that run when they want to
-manually initiate them, and pass variables needed to complete the job. This
-gives the users more flexability on how they could semi-automate the
-deploy/release process.
+1. Create a branch named `Manual`
 
-1. Create a branch called `manual-job`
-1. Create a file, `.github/workflows/manual-deployment.yml`
-1. Copy the following code:
+   ```bash
+   git checkout -b Manual
+   ```
 
-> **:warning: Note:** This job is primarily used for manual triggers.
+2. Create a file named `.github/workflows/05-manual.yml` with the following
+   contents
 
-```yaml
-# This is a basic workflow to help you get started with Actions
-name: Manual Deployment
+   > **:warning: NOTE:** This job is primarily used for manual triggers.
 
-# Set the job to run manually
-on:
-  workflow_dispatch:
-    # Set the input variables you want to pull in
-    inputs:
-      branch:
-        description: 'Branch to deploy'
-        required: true
-        default: 'Dev'
-      app_list:
-        description: 'Comma separated list of apps to deploy'
-        required: true
-        default: 'App1,App2'
+   ```yaml
+   name: Manual Deployment
 
-jobs:
-  Deploy_Apps:
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          echo "Running deployment of branch ${{ github.event.inputs.branch }}!"
-          echo "- Deploying the following Apps: ${{ github.event.inputs.app_list }}!"
-```
+   ###################################
+   # Start the job on manual trigger #
+   ###################################
+   on:
+     workflow_dispatch:
+       #####################
+       # Define the Inputs #
+       #####################
+       inputs:
+         branch:
+           description: 'Branch to deploy'
+           required: true
+           default: 'develop'
+         app_list:
+           description: 'Comma-separated list of apps to deploy'
+           required: true
+           default: 'App1,App2'
 
-1. Open a pull request and merge the `manual-job` branch into the `main` branch.
+   ##################
+   # Define the Job #
+   ##################
+   jobs:
+     # Name the Job
+     manual-deployment:
+       # Set the platform to run on
+       runs-on: ubuntu-latest
+
+       ####################
+       # Define the Steps #
+       ####################
+       steps:
+         - run: |
+             echo "Running deployment of branch ${{ github.event.inputs.branch }}!"
+             echo "- Deploying the following Apps: ${{ github.event.inputs.app_list }}!"
+   ```
+
+3. Commit the file
+
+   ```bash
+   git commit -am 'Add manual workflow'
+   ```
+
+4. Open a pull request and merge the `Manual` branch into the `main` branch,
+   making sure to delete the `Manual` branch after doing so
