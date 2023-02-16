@@ -81,6 +81,21 @@ Now that Dependabot is configured for your repository, it will scan the codebase
 and open pull requests for any known security vulnerabilities. Several files are
 included in this repository that will generate Dependabot alerts.
 
+> **:warning: NOTE:** It may take some time for Dependabot to scan your
+> repository and generate pull requests. Please be patient!
+
+1. Navigate to the **Pull requests** tab of your repository
+2. Select any open pull request with the `dependencies` label
+3. Review the release notes and commit information for the dependency
+4. Merge the pull request
+5. Update your local repository
+
+   ```bash
+   git pull
+   ```
+
+Feel free to repeat this process for any other open Dependabot pull requests!
+
 ## Additional Links
 
 - [Dependabot configuration](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file)
