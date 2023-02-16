@@ -116,7 +116,7 @@ image and load it into the Docker service in the action's runtime.
 
    > **:warning: NOTE:** Make sure **not** to delete the `artifacts` branch
    > after merging your pull request. The new action we created won't run until
-   > it is merged into `main`.Next, we will create another pull request to test
+   > it is merged into `main`. Next, we will create another pull request to test
    > the new action.
 
 6. Synchronize your local repository with the remote
