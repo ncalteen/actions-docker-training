@@ -34,4 +34,3 @@ printenv
 echo "----------------------------------------"
 
 echo "You passed the Var:[${VAR}]"
-echo "Goodbye from the container!"
