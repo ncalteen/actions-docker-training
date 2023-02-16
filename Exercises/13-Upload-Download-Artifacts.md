@@ -112,8 +112,13 @@ image and load it into the Docker service in the action's runtime.
    git commit -am 'Add upload/download workflows'
    ```
 
-5. Open a pull request and merge the `artifacts` branch into the `main` branch,
-   making sure **not** to delete the `artifacts` branch after doing so
+5. Open a pull request and merge the `artifacts` branch into the `main` branch
+
+   > **:warning: NOTE:** Make sure **not** to delete the `artifacts` branch
+   > after merging your pull request. The new action we created won't run until
+   > it is merged into `main`.Next, we will create another pull request to test
+   > the new action.
+
 6. Synchronize your local repository with the remote
 
    ```bash
@@ -134,7 +139,7 @@ image and load it into the Docker service in the action's runtime.
    ```
 
 9. Open a pull request and merge the `artifacts` branch into the `main` branch,
-   making sure **not** to delete the `artifacts` branch after doing so
+   making sure to delete the `artifacts` branch after doing so
 
    In the pull request, you will see the _Continuous Integration_ workflow
    running and the results when it completes. Once it completes, the _Download
