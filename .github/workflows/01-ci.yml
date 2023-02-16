@@ -47,7 +47,7 @@ jobs:
       ##############################
       # Build the Docker Container #
       ##############################
-      - name: Build Docker container
+      - name: Build Docker Container
         uses: docker/build-push-action@v4
         with:
           context: .
@@ -57,3 +57,12 @@ jobs:
             BUILD_REVISION=${{ github.sha }}
             BUILD_VERSION=${{ github.sha }}
           push: false
+          tags: super-cool-image:latest
+          outputs: type=docker,dest=/tmp/myimage.tar
+
+      # Upload the artifact
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: myimage
+          path: /tmp/myimage.tar
