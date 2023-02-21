@@ -57,7 +57,7 @@ contents and structures in this repository.
 ### Task 7: Continuous Deployment (CD)
 
 - [Step 16: Deploy a Docker Image](./17-Deploy-Docker.md)
-- [Step 17: Deploy a Release Image](./18-Deploy-Release.md)
+- [Step 17: Deploy a Release](./18-Deploy-Release.md)
 
 ### (Optional) Using GitHub Actions Beyond CI/CT/CD
 

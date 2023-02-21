@@ -1,7 +1,13 @@
 # Deploy a Docker Image
 
-In this exercise, we are going to deploy a Docker-based application to various
-production-like environments.
+In this exercise, we are going to deploy a Docker image to various container
+registries.
+
+> **Note:** This exercise makes use of the
+> [`bobheadxi/deployments`](https://github.com/bobheadxi/deployments) action to
+> work with deployment statuses. This is an open source action that is not
+> maintained by GitHub. Please review the action's source code before using it
+> in your own workflows.
 
 ## Create GitHub Actions Secrets
 
@@ -32,19 +38,13 @@ Complete the following set of steps for each of the listed secrets:
 | `GCR_TOKEN`             | `ABC123`                                       | GitHub PAT with access to GCR                         |
 | `AWS_ACCESS_KEY_ID`     | `AKIA1234`                                     | Access key ID to authenticate to AWS                  |
 | `AWS_SECRET_ACCESS_KEY` | `ABC123`                                       | Secret access key to authenticate to AWS              |
-| `ECR_REGISTRY`          | `https://1234.dkr.ecr.us-east-1.amazonaws.com` | AWS ECR registry URL                                  |
-| `ECR_REPOSITORY`        | `myrepo`                                       | AWS ECR repository                                    |
+| `ECR_REGISTRY`          | `https://1234.dkr.ecr.us-east-1.amazonaws.com` | Amazon ECR registry URL                               |
+| `ECR_REPOSITORY`        | `myrepo`                                       | Amazon ECR repository                                 |
 
 ## Deploy to DockerHub
 
 In this step, we will create a workflow that will build and push the Docker
 image to [DockerHub](https://hub.docker.com/).
-
-> **Note:** This step makes use of the
-> [`bobheadxi/deployments`](https://github.com/bobheadxi/deployments) action to
-> work with deployments. This is an open source action that is not maintained by
-> GitHub. Please review the action's source code before using it in your own
-> workflows.
 
 1. Create a branch named `dockerhub`
 
@@ -155,7 +155,7 @@ image to [DockerHub](https://hub.docker.com/).
                  repo: context.repo.repo,
                  issue_number: '${{ steps.create-issue.outputs.result }}',
                  title: 'New issue created',
-                 body: 'Successful!y deployed production'
+                 body: 'Successfully deployed to production'
                })
 
          # Update issue status (failure)
@@ -315,7 +315,7 @@ image to [DockerHub](https://hub.docker.com/).
                  repo: context.repo.repo,
                  issue_number: '${{ steps.create-issue.outputs.result }}',
                  title: 'New issue created',
-                 body: 'Successful!y deployed production'
+                 body: 'Successfully deployed to production'
                })
 
          # Update issue status (failure)
@@ -344,8 +344,8 @@ image to [DockerHub](https://hub.docker.com/).
 4. Open a pull request and merge the `gcr` branch into the `main` branch, making
    sure to delete the `gcr` branch after doing so
 
-   In the pull request, you will see the _DockerHub Production_ workflow running
-   and the results when it completes. You can review the logs of the run and the
+   In the pull request, you will see the _GCR Production_ workflow running and
+   the results when it completes. You can review the logs of the run and the
    steps it took by selecting **Details** next to the action. You can experiment
    with this action by making additional updates to the code and committing it.
 
@@ -356,151 +356,156 @@ image to [DockerHub](https://hub.docker.com/).
    Actions has generated an issue when the deployment started, and updated the
    issue when the deployment completed.
 
----
+## Deploy to Amazon Elastic Container Registry (ECR)
 
-#### Deploy to AWS ECR
+1. Create a branch named `ecr`
 
-1. Create a new branch called `Deploy`
-1. Add the following file to your repository:
-   `.github/workflows/deploy-prod-aws.yml`
+   ```bash
+   git checkout -b gcr
+   ```
 
-<details>
-<summary>Click here to add the file</summary>
+2. In the `.github/workflows/` directory, create a file named
+   `deploy-prod-ecr.yml` with the following contents
 
-```yaml
-# This is a basic workflow to help you get started with Actions
+   ```yaml
+   name: ECR Production
 
-name: Docker Production
+   on:
+     # Start the job on push
+     push:
+       # Don't run on push to main
+       branches-ignore:
+         - 'main'
 
-# Controls when the action will run.
-on:
-  push:
-    branches:
-      - 'master'
-      - 'main'
+   jobs:
+     # Release to GCR
+     ecr-prod-release:
+       # Name the job
+       name: Release to ECR
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
-  # This workflow contains a single job called "build"
-  docker-prod-release:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-    # You could use the following lines to help make sure only X people start the workflow
-    # if: github.actor == 'admiralawkbar' || github.actor == 'jwiebalk'
+       # Set the platform to run on
+       runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Checkout source code
-        uses: actions/checkout@v2
+       # Define the steps
+       steps:
+         # Set the deployment status to started
+         - name: Start Deployment
+           id: deployment
+           uses: bobheadxi/deployments@v1
+           with:
+             step: start
+             token: ${{ secrets.GITHUB_TOKEN }}
+             env: production
 
-      #########################
-      # Install Docker BuildX #
-      #########################
-      - name: Install Docker BuildX
-        uses: docker/setup-buildx-action@v1
+         # Checkout the codebase
+         - name: Checkout
+           uses: actions/checkout@v3
 
-      ####################
-      # Config AWS Creds #
-      ####################
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+         # Setup Docker BuildX
+         - name: Setup Docker BuildX
+           uses: docker/setup-buildx-action@v2
 
-      #################
-      # Login AWS ECR #
-      #################
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
+         # Configure AWS authentication
+         - name: Configure AWS Credentials
+           uses: aws-actions/configure-aws-credentials@v1-node16
+           with:
+             aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+             aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+             aws-region: us-east-1
 
-      # Update deployment API
-      - name: start deployment
-        uses: bobheadxi/deployments@v0.4.3
-        id: deployment
-        with:
-          step: start
-          token: ${{ secrets.GITHUB_TOKEN }}
-          env: Production
+         # Log in to Amazon ECR
+         - name: Log in to Amazon ECR
+           id: login-ecr
+           uses: aws-actions/amazon-ecr-login@v1
 
-      # Create a GitHub Issue with the info from this build
-      - name: Create GitHub Issue
-        uses: actions/github-script@v6
-        id: create-issue
-        with:
-          # https://octokit.github.io/rest.js/v18#issues-create
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            const create = await github.rest.issues.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: "Deploying to production",
-              body: 'Currently deploying...'
-            })
-            console.log('create', create)
-            return create.data.number
+         # Create an issue with build info
+         - name: Create Issue
+           id: create-issue
+           uses: actions/github-script@v6
+           with:
+             github-token: ${{secrets.GITHUB_TOKEN}}
+             script: |
+               const create = await github.rest.issues.create({
+                 owner: context.repo.owner,
+                 repo: context.repo.repo,
+                 title: 'Deploying to production',
+                 body: 'Currently deploying...'
+               })
+               console.log('create', create)
+               return create.data.number
 
-      ###########################################
-      # Build and Push containers to registries #
-      ###########################################
-      - name: Build and push
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: |
-            ${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:latest
-            ${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:v1
+         # Build and push container
+         - name: Build and Push
+           uses: docker/build-push-action@v4
+           with:
+             context: .
+             file: ./Dockerfile
+             push: true
+             tags: |
+               ${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:latest
+               ${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:v1
 
-      # Update Deployment API
-      - name: update deployment status
-        uses: bobheadxi/deployments@v0.4.3
-        if: always()
-        with:
-          step: finish
-          token: ${{ secrets.GITHUB_TOKEN }}
-          status: ${{ job.status }}
-          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-          env_url: https://github.com/orgs/${{github.repository_owner}}/packages?repo_name=${{github.repository.name}}
+         # Update deployment status
+         - name: Update Deployment Status
+           uses: bobheadxi/deployments@v1
+           if: always()
+           with:
+             step: finish
+             token: ${{ secrets.GITHUB_TOKEN }}
+             status: ${{ job.status }}
+             deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+             env_url: https://github.com/orgs/${{github.repository_owner}}/packages?repo_name=${{github.repository.name}}
+             env: production
 
-      - name: Update issue success
-        uses: actions/github-script@v6
-        if: success()
-        with:
-          # https://octokit.github.io/rest.js/v18#issues-create
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: "${{ steps.create-issue.outputs.result }}",
-              title: "New issue created",
-              body: "Successful!y deployed production"
-            })
+         # Update issue status (success)
+         - name: Update issue success
+           uses: actions/github-script@v6
+           if: success()
+           with:
+             github-token: ${{secrets.GITHUB_TOKEN}}
+             script: |
+               github.rest.issues.createComment({
+                 owner: context.repo.owner,
+                 repo: context.repo.repo,
+                 issue_number: '${{ steps.create-issue.outputs.result }}',
+                 title: 'New issue created',
+                 body: 'Successfully deployed to production'
+               })
 
-      - name: Update issue failure
-        uses: actions/github-script@v6
-        if: failure()
-        with:
-          # https://octokit.github.io/rest.js/v18#issues-create
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: "${{ steps.create-issue.outputs.result }}",
-              title: "New issue created",
-              body: "Failed to deploy to production"
-            })
-```
+         # Update issue status (failure)
+         - name: Update issue failure
+           uses: actions/github-script@v6
+           if: failure()
+           with:
+             github-token: ${{secrets.GITHUB_TOKEN}}
+             script: |
+               github.rest.issues.createComment({
+                 owner: context.repo.owner,
+                 repo: context.repo.repo,
+                 issue_number: '${{ steps.create-issue.outputs.result }}',
+                 title: 'New issue created',
+                 body: 'Failed to deploy to production'
+               })
+   ```
 
-</details>
+3. Commit the file
 
-- Commit the code
-- Open Pull request
+   ```bash
+   git add .
+   git commit -m "Add ECR deployment workflow"
+   ```
 
----
+4. Open a pull request and merge the `ecr` branch into the `main` branch, making
+   sure to delete the `ecr` branch after doing so
+
+   In the pull request, you will see the _ECR Production_ workflow running and
+   the results when it completes. You can review the logs of the run and the
+   steps it took by selecting **Details** next to the action. You can experiment
+   with this action by making additional updates to the code and committing it.
+
+   When the workflow starts, you will see a notification in the pull request
+   that the branch is being deployed. When the workflow completes, you will see
+   a notification that the deployment was successful. Additionally, if you
+   navigate to the **Issues** tab of your repository, you will see that GitHub
+   Actions has generated an issue when the deployment started, and updated the
+   issue when the deployment completed.
