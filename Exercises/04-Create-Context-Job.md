@@ -61,7 +61,8 @@ itself and any job(s) or step(s) it defines.
 3. Commit the file
 
    ```bash
-   git commit -am 'Add context workflow'
+   git add .
+   git commit -m 'Add context workflow'
    ```
 
 4. Open a pull request and merge the `context` branch into the `main` branch,

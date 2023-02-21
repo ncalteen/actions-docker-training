@@ -52,7 +52,8 @@ values.
 3. Commit the file
 
    ```bash
-   git commit -am 'Add matrix workflow'
+   git add .
+   git commit -m 'Add matrix workflow'
    ```
 
 4. Open a pull request and merge the `matrix` branch into the `main` branch,

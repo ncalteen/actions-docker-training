@@ -33,7 +33,7 @@ image and load it into the Docker service in the action's runtime.
      # Build the container
      build:
        # Name the job
-       name: CI
+       name: Upload Container
 
        # Set the platform to run on
        runs-on: ubuntu-latest
@@ -71,11 +71,11 @@ image and load it into the Docker service in the action's runtime.
 
      # Download the container
      download-container:
-       # Name the job
-       name: Download Container
-
        # Must run after the build job
        needs: build
+
+       # Name the job
+       name: Download Container
 
        # Set the platform to run on
        runs-on: ubuntu-latest
@@ -88,7 +88,7 @@ image and load it into the Docker service in the action's runtime.
 
          # Download the artifact
          - name: Download artifact
-           uses: actions/download-artifact@v2
+           uses: actions/download-artifact@v3
            with:
              name: myimage
              path: /tmp
@@ -103,7 +103,8 @@ image and load it into the Docker service in the action's runtime.
 3. Commit the file
 
    ```bash
-   git commit -am 'Add upload/download workflows'
+   git add .
+   git commit -m 'Add upload/download workflows'
    ```
 
 4. Open a pull request and merge the `artifacts` branch into the `main` branch
@@ -129,7 +130,8 @@ image and load it into the Docker service in the action's runtime.
 7. Commit the file
 
    ```bash
-   git commit -am 'Update Dockerfile'
+   git add .
+   git commit -m 'Update Dockerfile'
    ```
 
 8. Open a pull request and merge the `artifacts` branch into the `main` branch,

@@ -57,7 +57,8 @@ changes to the code and run a linter against it to ensure code sanity.
 3. Commit the file
 
    ```bash
-   git commit -am 'Add linting workflow'
+   git add .
+   git commit -m 'Add linting workflow'
    ```
 
 4. Open a pull request to merge the `ct` branch into the `main` branch

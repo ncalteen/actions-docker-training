@@ -51,7 +51,8 @@ easily incorporated into workflows that consume the action.
 5. Commit the files
 
    ```bash
-   git commit -am 'Creating custom action'
+   git add .
+   git commit -m 'Creating custom action'
    git push origin main
    ```
 
@@ -97,7 +98,8 @@ workflow that uses the custom action.
 3. Commit the file
 
    ```bash
-   git commit -am 'Add centralized action workflow'
+   git add .
+   git commit -m 'Add centralized action workflow'
    ```
 
 4. Open a pull request and merge the `centralized` branch into the `main`
