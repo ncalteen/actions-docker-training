@@ -69,7 +69,7 @@ pushing a new Gem to the GitHub Packages registry.
              touch ~/.gem/credentials
              chmod 0600 ~/.gem/credentials
              echo ":github: Bearer ${{ secrets.GITHUB_TOKEN }}" >> ~/.gem/credentials
-             gem push --key github --host https://rubygems.pkg.github.com/${{ github.event.repository.owner }} ${{ github.event.repository.name }}-0.0.${{ github.run_id }}.gem
+             gem push --key github --host https://rubygems.pkg.github.com/${{ github.repository_owner }} ${{ github.event.repository.name }}-0.0.${{ github.run_id }}.gem
    ```
 
 3. Commit the file
