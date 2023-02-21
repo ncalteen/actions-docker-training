@@ -95,7 +95,8 @@ choosing.
 3. Commit the file
 
    ```bash
-   git commit -am 'Add Dockerfile'
+   git add .
+   git commit -m 'Add Dockerfile'
    ```
 
 4. Open a pull request and merge the `docker` branch into the `main` branch,

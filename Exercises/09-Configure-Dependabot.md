@@ -69,7 +69,8 @@ is up to date and free of known security vulnerabilities.
 3. Commit the file
 
    ```bash
-   git commit -am 'Add dependabot configuration'
+   git add .
+   git commit -m 'Add dependabot configuration'
    ```
 
 4. Open a pull request and merge the `dependabot` branch into the `main` branch,

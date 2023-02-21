@@ -64,7 +64,8 @@ that certain jobs will not start until others complete successfully.
 3. Commit the file
 
    ```bash
-   git commit -am 'Add dependent jobs workflow'
+   git add .
+   git commit -m 'Add dependent jobs workflow'
    ```
 
 4. Open a pull request and merge the `dependent` branch into the `main` branch,

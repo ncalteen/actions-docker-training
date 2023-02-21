@@ -76,7 +76,8 @@ successfully.
 5. Commit the file
 
    ```bash
-   git commit -am "Add CI workflow"
+   git add .
+   git commit -m "Add CI workflow"
    ```
 
 6. Open a pull request and merge the `ci` branch into the `main` branch, making

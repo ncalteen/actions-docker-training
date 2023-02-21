@@ -59,7 +59,8 @@ provide feedback on any potential security risks.
 3. Commit the file
 
    ```bash
-   git commit -am 'Add security workflow'
+   git add .
+   git commit -m 'Add security workflow'
    ```
 
 4. Open a pull request and merge the `security` branch into the `main` branch,

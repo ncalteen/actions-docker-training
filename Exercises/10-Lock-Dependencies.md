@@ -126,7 +126,8 @@ several languages.
 3. Commit the file
 
    ```bash
-   git commit -am 'Add Python lock file'
+   git add .
+   git commit -m 'Add Python lock file'
    ```
 
 4. Open a pull request and merge the `python-deps` branch into the `main`
@@ -464,7 +465,8 @@ several languages.
 3. Commit the file
 
    ```bash
-   git commit -am 'Add Node.js lock file'
+   git add .
+   git commit -m 'Add Node.js lock file'
    ```
 
 4. Open a pull request and merge the `node-deps` branch into the `main` branch,
@@ -546,7 +548,8 @@ several languages.
 3. Commit the file
 
    ```bash
-   git commit -am 'Add Ruby lock file'
+   git add .
+   git commit -m 'Add Ruby lock file'
    ```
 
 4. Open a pull request and merge the `ruby-deps` branch into the `main` branch,
