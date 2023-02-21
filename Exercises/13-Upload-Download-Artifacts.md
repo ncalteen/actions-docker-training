@@ -30,6 +30,7 @@ image and load it into the Docker service in the action's runtime.
          - 'main'
 
    jobs:
+     # Build the container
      build:
        # Name the job
        name: CI
@@ -67,7 +68,15 @@ image and load it into the Docker service in the action's runtime.
            with:
              name: myimage
              path: /tmp/myimage.tar
+
+     # Download the container
      download-container:
+       # Name the job
+       name: Download Container
+
+       # Must run after the build job
+       needs: build
+
        # Set the platform to run on
        runs-on: ubuntu-latest
 

@@ -67,6 +67,8 @@ jobs:
           name: myimage
           path: /tmp/myimage.tar
   download-container:
+    needs: build
+
     # Set the platform to run on
     runs-on: ubuntu-latest
 
@@ -78,7 +80,7 @@ jobs:
 
       # Download the artifact
       - name: Download artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: myimage
           path: /tmp
