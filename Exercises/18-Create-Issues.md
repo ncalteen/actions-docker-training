@@ -91,6 +91,12 @@ creating and updating an issue using GitHub Scripts.
    Additionally, a new issue will be created in the **Issues** tab of the
    repository.
 
+5. In your repository, open the **Actions** tab
+6. Select the **Create Issue** action
+7. Select **Run workflow**, then **Run workflow** again
+
+   This will initiate the workflow again, creating a new issue.
+
 ## Reference
 
 - [GitHub Script Action](https://github.com/marketplace/actions/github-script)
