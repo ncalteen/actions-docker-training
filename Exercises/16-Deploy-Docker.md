@@ -65,7 +65,7 @@ image to [DockerHub](https://hub.docker.com/).
 
    jobs:
      # Release to DockerHub
-     docker-prod-release:
+     release:
        # Name the job
        name: Release to DockerHub
 
@@ -192,7 +192,7 @@ image to [DockerHub](https://hub.docker.com/).
 
    jobs:
      # Release to GCR
-     gcr-prod-release:
+     release:
        # Name the job
        name: Release to GCR
 
@@ -331,7 +331,7 @@ image to [DockerHub](https://hub.docker.com/).
 
    jobs:
      # Release to GCR
-     ecr-prod-release:
+     release:
        # Name the job
        name: Release to ECR
 

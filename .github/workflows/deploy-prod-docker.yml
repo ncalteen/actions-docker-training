@@ -9,7 +9,7 @@ on:
 
 jobs:
   # Release to DockerHub
-  docker-prod-release:
+  release:
     # Name the job
     name: Release to DockerHub
 

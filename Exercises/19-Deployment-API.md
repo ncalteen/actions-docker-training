@@ -1,5 +1,11 @@
 # Use GitHub's Deployment API to Update Environments
 
+> **Note:** This exercise makes use of the
+> [`bobheadxi/deployments`](https://github.com/bobheadxi/deployments) action to
+> work with deployment statuses. This is an open source action that is not
+> maintained by GitHub. Please review the action's source code before using it
+> in your own workflows.
+
 This exercise will walk you through utilizing GitHub's
 [Deployment API](https://docs.github.com/en/rest/deployments/deployments). The
 Deployment API is used to manage deployments and deployment environments.
@@ -7,9 +13,7 @@ Whenever a deployment occurs, GitHub will send a `deployment` event to any
 external services you have configured. This event will contain information about
 the deployment, including the environment, the status, and the commit SHA. You
 can use this information to update your deployment environments within GitHub
-Actions or other external services. In this exercise, you will use the
-[GitHub Deployments Action](https://github.com/marketplace/actions/github-deployments)
-to update the status of your deployments.
+Actions or other external services.
 
 > **Note:** This exercise builds off [Exercise 16](./16-Deploy-Docker.md). If
 > you have not completed that exercise, please do so before continuing.

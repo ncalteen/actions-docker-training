@@ -9,7 +9,7 @@ on:
 
 jobs:
   # Release to GCR
-  gcr-prod-release:
+  release:
     # Name the job
     name: Release to GCR
 
