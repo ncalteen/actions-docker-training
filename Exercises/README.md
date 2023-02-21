@@ -59,7 +59,7 @@ contents and structures in this repository.
 - [Step 16: Deploy a Docker Image](./17-Deploy-Docker.md)
 - [Step 17: Deploy a Release Image](./18-Deploy-Release.md)
 
-### (Optional) Using GitHub Actions Beyond CI/CT/CD
+### (Optional) Using GitHub Actions Beyond CI/CD
 
 - [Step 18: Use GitHub Script to Create Issues](./19-Create-Issues.md)
 - [Step 19: Use GitHub's Deployment API to Update Environments](./20-Deployment-API.md)

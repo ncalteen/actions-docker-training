@@ -1,47 +1,78 @@
 # Use GitHub's Deployment API to Update Environments
 
-This exercise will walk you through utilizing the **Github Deployment API** on
-your current repository.
+This exercise will walk you through utilizing GitHub's
+[Deployment API](https://docs.github.com/en/rest/deployments/deployments). The
+Deployment API is used to manage deployments and deployment environments.
+Whenever a deployment occurs, GitHub will send a `deployment` event to any
+external services you have configured. This event will contain information about
+the deployment, including the environment, the status, and the commit SHA. You
+can use this information to update your deployment environments within GitHub
+Actions or other external services. In this exercise, you will use the
+[GitHub Deployments Action](https://github.com/marketplace/actions/github-deployments)
+to update the status of your deployments.
 
-The objective of the Deployment API is to help showcase and link your
-environments to the events that created them.
+> **Note:** This exercise builds off [Exercise 16](./16-Deploy-Docker.md). If
+> you have not completed that exercise, please do so before continuing.
 
-## Update your GitHub Action workflow file
+## Update your Workflow
 
-1. Create a new branch of code called `API`
-1. Edit one of your `deploy-docker.yml` workflow files
-1. Copy the code before and after the deployment:
+1. Create a new branch named `deployment-api`
+
+   ```bash
+   git checkout -b deployment-api
+   ```
+
+2. Open one of the following workflow files you created previously:
+   - `deploy-prod-docker.yml`
+   - `deploy-prod-gcr.yml`
+   - `deploy-prod-ecr.yml`
+3. Add the following as the **first** step in the workflow
 
    ```yml
-   # Update deployment API
-   - name: start deployment
-     uses: bobheadxi/deployments@v0.4.3
+   # Set the deployment status to started
+   - name: Start Deployment
      id: deployment
+     uses: bobheadxi/deployments@v1
      with:
        step: start
        token: ${{ secrets.GITHUB_TOKEN }}
-       env: Production
+       env: production
+   ```
 
-   # ... Code that deploys the docker image to an environment here...
+4. Add the following as the **last** step in the workflow
 
-   # Update Deployment API
-   - name: update deployment status
-     uses: bobheadxi/deployments@v0.4.3
+   ```yml
+   # Update deployment status
+   - name: Update Deployment Status
+     uses: bobheadxi/deployments@v1
      if: always()
      with:
        step: finish
        token: ${{ secrets.GITHUB_TOKEN }}
        status: ${{ job.status }}
        deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-       env_url: https://github.com/orgs/${{github.owner}}/packages?repo_name=${{github.repository}}
+       env_url: https://github.com/orgs/${{github.repository_owner}}/packages?repo_name=${{github.repository.name}}
+       env: production
    ```
 
-1. Commit the file.
-1. Open a pull request with the `API` branch into the `main` branch.
-1. Merge the pull request.
-1. You will now see the job run and deploy your Docker image, and update the
-   deployment info in your repository.
+5. Commit the file
 
-### Linkage
+   ```bash
+   git add .
+   git commit -m "Add deployment status updates"
+   ```
 
-- [GitHub Deployment Action](https://github.com/marketplace/actions/github-deployments)
+6. Open a pull request and merge the `deployment-api` branch into the `main`
+   branch, making sure to delete the `deployment-api` branch after doing so
+
+   When the workflow starts, you will see a notification in the pull request
+   that the branch is being deployed. When the workflow completes, you will see
+   a notification that the deployment was successful.
+
+7. In your repository, select the **Code** tab
+8. In the right section, select the **production** environment
+9. Select **View deployment**
+
+   Here you will be directed to the destination of the deployment. In this
+   exercise, this is the list of "production-ready" container images that have
+   been deployed.

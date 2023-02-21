@@ -3,12 +3,6 @@
 In this exercise, we are going to deploy a Docker image to various container
 registries.
 
-> **Note:** This exercise makes use of the
-> [`bobheadxi/deployments`](https://github.com/bobheadxi/deployments) action to
-> work with deployment statuses. This is an open source action that is not
-> maintained by GitHub. Please review the action's source code before using it
-> in your own workflows.
-
 ## Create GitHub Actions Secrets
 
 Before we can interact with different Docker registries, GitHub Actions needs
@@ -80,15 +74,6 @@ image to [DockerHub](https://hub.docker.com/).
 
        # Define the steps
        steps:
-         # Set the deployment status to started
-         - name: Start Deployment
-           id: deployment
-           uses: bobheadxi/deployments@v1
-           with:
-             step: start
-             token: ${{ secrets.GITHUB_TOKEN }}
-             env: production
-
          # Checkout the codebase
          - name: Checkout
            uses: actions/checkout@v3
@@ -130,18 +115,6 @@ image to [DockerHub](https://hub.docker.com/).
              tags: |
                ${{ github.actor }}/demo-action:latest
                ${{ github.actor }}/demo-action:v1
-
-         # Update deployment status
-         - name: Update Deployment Status
-           uses: bobheadxi/deployments@v1
-           if: always()
-           with:
-             step: finish
-             token: ${{ secrets.GITHUB_TOKEN }}
-             status: ${{ job.status }}
-             deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-             env_url: https://github.com/orgs/${{github.repository_owner}}/packages?repo_name=${{github.repository.name}}
-             env: production
 
          # Update issue status (success)
          - name: Update issue success
@@ -228,15 +201,6 @@ image to [DockerHub](https://hub.docker.com/).
 
        # Define the steps
        steps:
-         # Set the deployment status to started
-         - name: Start Deployment
-           id: deployment
-           uses: bobheadxi/deployments@v1
-           with:
-             step: start
-             token: ${{ secrets.GITHUB_TOKEN }}
-             env: production
-
          # Checkout the codebase
          - name: Checkout
            uses: actions/checkout@v3
@@ -290,18 +254,6 @@ image to [DockerHub](https://hub.docker.com/).
              echo VERSION=$VERSION
              docker tag ${{ github.event.repository.name }} $IMAGE_ID:$VERSION
              docker push $IMAGE_ID:$VERSION
-
-         # Update deployment status
-         - name: Update Deployment Status
-           uses: bobheadxi/deployments@v1
-           if: always()
-           with:
-             step: finish
-             token: ${{ secrets.GITHUB_TOKEN }}
-             status: ${{ job.status }}
-             deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-             env_url: https://github.com/orgs/${{github.repository_owner}}/packages?repo_name=${{github.repository.name}}
-             env: production
 
          # Update issue status (success)
          - name: Update issue success
@@ -388,15 +340,6 @@ image to [DockerHub](https://hub.docker.com/).
 
        # Define the steps
        steps:
-         # Set the deployment status to started
-         - name: Start Deployment
-           id: deployment
-           uses: bobheadxi/deployments@v1
-           with:
-             step: start
-             token: ${{ secrets.GITHUB_TOKEN }}
-             env: production
-
          # Checkout the codebase
          - name: Checkout
            uses: actions/checkout@v3
@@ -445,18 +388,6 @@ image to [DockerHub](https://hub.docker.com/).
                ${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:latest
                ${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:v1
 
-         # Update deployment status
-         - name: Update Deployment Status
-           uses: bobheadxi/deployments@v1
-           if: always()
-           with:
-             step: finish
-             token: ${{ secrets.GITHUB_TOKEN }}
-             status: ${{ job.status }}
-             deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-             env_url: https://github.com/orgs/${{github.repository_owner}}/packages?repo_name=${{github.repository.name}}
-             env: production
-
          # Update issue status (success)
          - name: Update issue success
            uses: actions/github-script@v6
@@ -503,9 +434,6 @@ image to [DockerHub](https://hub.docker.com/).
    steps it took by selecting **Details** next to the action. You can experiment
    with this action by making additional updates to the code and committing it.
 
-   When the workflow starts, you will see a notification in the pull request
-   that the branch is being deployed. When the workflow completes, you will see
-   a notification that the deployment was successful. Additionally, if you
-   navigate to the **Issues** tab of your repository, you will see that GitHub
-   Actions has generated an issue when the deployment started, and updated the
-   issue when the deployment completed.
+   If you navigate to the **Issues** tab of your repository, you will see that
+   GitHub Actions has generated an issue when the deployment started, and
+   updated the issue when the deployment completed.
