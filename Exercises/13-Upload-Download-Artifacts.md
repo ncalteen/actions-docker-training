@@ -67,21 +67,6 @@ image and load it into the Docker service in the action's runtime.
            with:
              name: myimage
              path: /tmp/myimage.tar
-   ```
-
-3. In the `.github/workflows/` directory, create a file named `download.yml`
-   with the following contents
-
-   ```yaml
-   name: Download Container from CI Workflow
-
-   on:
-     # Start the job on completion of the CI workflow
-     workflow_run:
-       workflows:
-         - CI
-
-   jobs:
      download-container:
        # Set the platform to run on
        runs-on: ubuntu-latest
@@ -106,39 +91,39 @@ image and load it into the Docker service in the action's runtime.
              docker image ls -a
    ```
 
-4. Commit the file
+3. Commit the file
 
    ```bash
    git commit -am 'Add upload/download workflows'
    ```
 
-5. Open a pull request and merge the `artifacts` branch into the `main` branch
+4. Open a pull request and merge the `artifacts` branch into the `main` branch
 
    > **:warning: NOTE:** Make sure **not** to delete the `artifacts` branch
    > after merging your pull request. The new action we created won't run until
    > it is merged into `main`. Next, we will create another pull request to test
    > the new action.
 
-6. Synchronize your local repository with the remote
+5. Synchronize your local repository with the remote
 
    ```bash
    git pull
    ```
 
-7. In the `library/` directory, open the file named `entrypoint.sh` and add the
+6. In the `library/` directory, open the file named `entrypoint.sh` and add the
    following line to the bottom
 
    ```bash
    echo "Goodbye from the container!"
    ```
 
-8. Commit the file
+7. Commit the file
 
    ```bash
    git commit -am 'Update Dockerfile'
    ```
 
-9. Open a pull request and merge the `artifacts` branch into the `main` branch,
+8. Open a pull request and merge the `artifacts` branch into the `main` branch,
    making sure to delete the `artifacts` branch after doing so
 
    In the pull request, you will see the _Continuous Integration_ workflow

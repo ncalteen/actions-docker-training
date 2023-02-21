@@ -1,12 +1,19 @@
-# Upload and Download from Artifactory
+# Upload and Download Artifacts from Artifactory
 
-- If your job produces a build artifact that users need to view, or need to be
-  passed to another build machine, the **Github Actions** upload and download
-  can help with this process.
-- This can be achieved with the
-  [JFROG CLI Action](https://github.com/marketplace/actions/jfrog-cli)
+If your project produces build artifact(s) that are needed by other projects or
+users, the
+[`actions/upload-artifact`](https://github.com/actions/upload-artifact) and
+[`actions/download-artifact`](https://github.com/actions/download-artifact)
+actions can help with this process. If your team is using Artifactory, you can
+also use the
+[JFROG CLI Action](https://github.com/marketplace/actions/jfrog-cli) to connect
+to Artifactory and run various CLI commands.
 
-### Exercise: Add Upload and Download
+1. Create a branch named `artifactory`
+
+   ```bash
+   git checkout -b artifactory
+   ```
 
 1. Add the following code to your build pipeline, and it will then start
    publishing the artifact once the step has completed.
