@@ -138,7 +138,7 @@ jobs:
         id: wait-for-release
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          checkName: release
+          checkName: Release to GCR
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       # Do something if the deployment was successful
