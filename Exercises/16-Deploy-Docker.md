@@ -27,7 +27,7 @@ Complete the following set of steps for each of the listed secrets:
 | Name                    | Value                                          | Description                                           |
 | ----------------------- | ---------------------------------------------- | ----------------------------------------------------- |
 | `DOCKERHUB_USERNAME`    | `docker-user`                                  | Username to authenticate to DockerHub                 |
-| `DOCKERHUB_PASSWORD`    | `P@ssw0rd1`                                    | Password to authenticate to DockerHub                 |
+| `DOCKERHUB_PASSWORD`    | `P@ssw0rd1`                                    | Password or access token to authenticate to DockerHub |
 | `GCR_USERNAME`          | `gcr-user`                                     | Username to authenticate to GitHub Container Registry |
 | `GCR_TOKEN`             | `ABC123`                                       | GitHub PAT with access to GCR                         |
 | `AWS_ACCESS_KEY_ID`     | `AKIA1234`                                     | Access key ID to authenticate to AWS                  |
@@ -85,6 +85,15 @@ image to [DockerHub](https://hub.docker.com/).
 
        # Define the steps
        steps:
+         # Set the deployment status to started
+         - name: Start Deployment
+           id: deployment
+           uses: bobheadxi/deployments@v1
+           with:
+             step: start
+             token: ${{ secrets.GITHUB_TOKEN }}
+             env: production
+
          # Checkout the codebase
          - name: Checkout
            uses: actions/checkout@v3
@@ -99,15 +108,6 @@ image to [DockerHub](https://hub.docker.com/).
            with:
              username: ${{ secrets.DOCKERHUB_USERNAME }}
              password: ${{ secrets.DOCKERHUB_PASSWORD }}
-
-         # Set the deployment status to started
-         - name: Start Deployment
-           id: deployment
-           uses: bobheadxi/deployments@v1
-           with:
-             step: start
-             token: ${{ secrets.GITHUB_TOKEN }}
-             env: production
 
          # Create an issue with build info
          - name: Create Issue
@@ -133,8 +133,8 @@ image to [DockerHub](https://hub.docker.com/).
              file: ./Dockerfile
              push: true
              tags: |
-               ${{ env.DOCKER_ORG }}/demo-action:latest
-               ${{ env.DOCKER_ORG }}/demo-action:v1
+               demo-action:latest
+               demo-action:v1
 
          # Update deployment status
          - name: Update Deployment Status
@@ -193,6 +193,10 @@ image to [DockerHub](https://hub.docker.com/).
    and the results when it completes. You can review the logs of the run and the
    steps it took by selecting **Details** next to the action. You can experiment
    with this action by making additional updates to the code and committing it.
+
+   When the workflow starts, you will see a notification in the pull request
+   that the branch is being deployed. When the workflow completes, you will see
+   a notification that the deployment was successful.
 
 ---
 

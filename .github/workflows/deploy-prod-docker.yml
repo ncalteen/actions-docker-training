@@ -24,6 +24,15 @@ jobs:
 
     # Define the steps
     steps:
+      # Set the deployment status to started
+      - name: Start Deployment
+        id: deployment
+        uses: bobheadxi/deployments@v1
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: production
+
       # Checkout the codebase
       - name: Checkout
         uses: actions/checkout@v3
@@ -38,15 +47,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-
-      # Set the deployment status to started
-      - name: Start Deployment
-        id: deployment
-        uses: bobheadxi/deployments@v1
-        with:
-          step: start
-          token: ${{ secrets.GITHUB_TOKEN }}
-          env: production
 
       # Create an issue with build info
       - name: Create Issue
@@ -72,8 +72,8 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ${{ env.DOCKER_ORG }}/demo-action:latest
-            ${{ env.DOCKER_ORG }}/demo-action:v1
+            demo-action:latest
+            demo-action:v1
 
       # Update deployment status
       - name: Update Deployment Status
