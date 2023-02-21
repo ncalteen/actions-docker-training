@@ -83,12 +83,14 @@ pushing a new Gem to the GitHub Packages registry.
    making sure to delete the `packages` branch after doing so
 
    In the pull request, you will see the _GitHub Package Registry / Build Ruby
-   Gem_ job running and the results when it completes.
+   Gem_ job running and the results when it completes. You can review the logs
+   of the run and the steps it took by selecting **Details** next to the action.
+   You can experiment with this action by making additional updates to the code
+   and committing it.
 
-   Once it completes, the _Continuous Integration / Download from Artifactory_
-   job will start. You can review the logs of the run and the steps it took by
-   selecting **Details** next to the action. You can experiment with this action
-   by making additional updates to the code and committing it.
+   If you would like to test installing the package you created, you can do so
+   by following the instructions in the
+   [RubyGems registry documentation](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-rubygems-registry#installing-a-package).
 
 ## Reference
 
