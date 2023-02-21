@@ -55,6 +55,10 @@ image to [DockerHub](https://hub.docker.com/).
 2. In the `.github/workflows/` directory, create a file named
    `deploy-prod-docker.yml` with the following contents
 
+   > **Note:** This workflow assumes your DockerHub username matches your
+   > GitHub.com username. If this is not the case, you will need to update
+   > references to `${{ github.actor }}` to use your DockerHub username.
+
    ```yaml
    name: DockerHub Production
 
@@ -73,9 +77,6 @@ image to [DockerHub](https://hub.docker.com/).
 
        # Set the platform to run on
        runs-on: ubuntu-latest
-
-       # (Optional) Restrict this job to specific users
-       # if: github.actor == 'admiralawkbar' || github.actor == 'jwiebalk'
 
        # Define the steps
        steps:
@@ -127,8 +128,8 @@ image to [DockerHub](https://hub.docker.com/).
              file: ./Dockerfile
              push: true
              tags: |
-               demo-action:latest
-               demo-action:v1
+               ${{ github.actor }}/demo-action:latest
+               ${{ github.actor }}/demo-action:v1
 
          # Update deployment status
          - name: Update Deployment Status
@@ -190,7 +191,10 @@ image to [DockerHub](https://hub.docker.com/).
 
    When the workflow starts, you will see a notification in the pull request
    that the branch is being deployed. When the workflow completes, you will see
-   a notification that the deployment was successful.
+   a notification that the deployment was successful. Additionally, if you
+   navigate to the **Issues** tab of your repository, you will see that GitHub
+   Actions has generated an issue when the deployment started, and updated the
+   issue when the deployment completed.
 
 ---
 

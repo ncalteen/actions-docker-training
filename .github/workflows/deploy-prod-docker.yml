@@ -16,9 +16,6 @@ jobs:
     # Set the platform to run on
     runs-on: ubuntu-latest
 
-    # (Optional) Restrict this job to specific users
-    # if: github.actor == 'admiralawkbar' || github.actor == 'jwiebalk'
-
     # Define the steps
     steps:
       # Set the deployment status to started
