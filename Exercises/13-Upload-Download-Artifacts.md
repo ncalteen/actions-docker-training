@@ -104,7 +104,7 @@ image and load it into the Docker service in the action's runtime.
 
    ```bash
    git add .
-   git commit -m 'Add upload/download workflows'
+   git commit -m 'Add upload/download jobs'
    ```
 
 4. Open a pull request and merge the `artifacts` branch into the `main` branch
@@ -137,9 +137,9 @@ image and load it into the Docker service in the action's runtime.
 8. Open a pull request and merge the `artifacts` branch into the `main` branch,
    making sure to delete the `artifacts` branch after doing so
 
-   In the pull request, you will see the _Continuous Integration_ workflow
-   running and the results when it completes. Once it completes, the _Download
-   Container from CI Workflow_ will start. You can review the logs of the run
-   and the steps it took by selecting **Details** next to the action. You can
-   experiment with this action by making additional updates to the code and
-   committing it.
+   In the pull request, you will see the _Continuous Integration / Upload
+   Container_ job running and the results when it completes. Once it completes,
+   the _Continuous Integration / Download Container_ job will start. You can
+   review the logs of the run and the steps it took by selecting **Details**
+   next to the action. You can experiment with this action by making additional
+   updates to the code and committing it.
