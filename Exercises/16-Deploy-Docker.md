@@ -133,8 +133,8 @@ image to [DockerHub](https://hub.docker.com/).
              file: ./Dockerfile
              push: true
              tags: |
-               $DOCKER_ORG/demo-action:latest
-               $DOCKER_ORG/demo-action:v1
+               ${{ env.DOCKER_ORG }}/demo-action:latest
+               ${{ env.DOCKER_ORG }}/demo-action:v1
 
          # Update deployment status
          - name: Update Deployment Status
