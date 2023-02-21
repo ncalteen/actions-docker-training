@@ -1,0 +1,56 @@
+name: Create Issue
+
+on:
+  # Start the workflow on push
+  push:
+    # Don't run on push to main
+    branches-ignore:
+      - 'main'
+  # Run the workflow manually
+  workflow_dispatch:
+
+jobs:
+  build:
+    # Set the platform to run on
+    runs-on: ubuntu-latest
+
+    # Define the steps
+    steps:
+      # Checkout the codebase
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Run a single command using the runner's shell
+      - name: Run Command
+        run: echo 'Hello, World!'
+
+      # Create an issue
+      - name: Create Issue
+        uses: actions/github-script@v6
+        id: create-issue
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const create = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'New issue created',
+              body: 'Heres some base data'
+            })
+            console.log('create', create)
+            return create.data.number
+
+      # Update the issue
+      # Uses the issue number from the previous step
+      - name: Update Issue
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: "${{ steps.create-issue.outputs.result }}",
+              title: 'New issue created',
+              body: 'Adding a comment!'
+            })
