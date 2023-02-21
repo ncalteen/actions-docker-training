@@ -7,9 +7,6 @@ on:
     branches-ignore:
       - 'main'
 
-env:
-  DOCKER_ORG: ncalteen-learning
-
 jobs:
   # Release to DockerHub
   docker-prod-release:
@@ -72,8 +69,8 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            demo-action:latest
-            demo-action:v1
+            user/demo-action:latest
+            user/demo-action:v1
 
       # Update deployment status
       - name: Update Deployment Status

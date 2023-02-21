@@ -55,9 +55,6 @@ image to [DockerHub](https://hub.docker.com/).
 2. In the `.github/workflows/` directory, create a file named
    `deploy-prod-docker.yml` with the following contents
 
-   > **Note:** Make sure to replace the value of the `DOCKER_ORG` environment
-   > variable with an appropriate organization name.
-
    ```yaml
    name: DockerHub Production
 
@@ -67,9 +64,6 @@ image to [DockerHub](https://hub.docker.com/).
        # Don't run on push to main
        branches-ignore:
          - 'main'
-
-   env:
-     DOCKER_ORG: myorg # Replace this value!
 
    jobs:
      # Release to DockerHub
