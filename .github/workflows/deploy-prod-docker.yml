@@ -1,0 +1,114 @@
+name: DockerHub Production
+
+on:
+  # Start the job on push
+  push:
+    # Don't run on push to main
+    branches-ignore:
+      - 'main'
+
+jobs:
+  # Release to DockerHub
+  docker-prod-release:
+    # Name the job
+    name: Release to DockerHub
+
+    # Set the platform to run on
+    runs-on: ubuntu-latest
+
+    # (Optional) Restrict this job to specific users
+    # if: github.actor == 'admiralawkbar' || github.actor == 'jwiebalk'
+
+    # Define the steps
+    steps:
+      # Checkout the codebase
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Setup Docker BuildX
+      - name: Setup Docker BuildX
+        uses: docker/setup-buildx-action@v2
+
+      # Login to DockerHub
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      # Set the deployment status to started
+      - name: Start Deployment
+        id: deployment
+        uses: bobheadxi/deployments@v1
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: Production
+
+      # Create an issue with build info
+      - name: Create Issue
+        id: create-issue
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const create = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'Deploying to production',
+              body: 'Currently deploying...'
+            })
+            console.log('create', create)
+            return create.data.number
+
+      # Build and push container
+      - name: Build and Push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            DOCKER_ORG/demo-action:latest
+            DOCKER_ORG/demo-action:v1
+
+      # Update deployment status
+      - name: Update Deployment Status
+        uses: bobheadxi/deployments@v1
+        if: always()
+        with:
+          step: finish
+          token: ${{ secrets.GITHUB_TOKEN }}
+          status: ${{ job.status }}
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          env_url: https://github.com/orgs/${{github.repository_owner}}/packages?repo_name=${{github.repository.name}}
+
+      # Update issue status (success)
+      - name: Update issue success
+        uses: actions/github-script@v6
+        if: success()
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: '${{ steps.create-issue.outputs.result }}',
+              title: 'New issue created',
+              body: 'Successful!y deployed production'
+            })
+
+      # Update issue status (failure)
+      - name: Update issue failure
+        uses: actions/github-script@v6
+        if: failure()
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: '${{ steps.create-issue.outputs.result }}',
+              title: 'New issue created',
+              body: 'Failed to deploy to production'
+            })

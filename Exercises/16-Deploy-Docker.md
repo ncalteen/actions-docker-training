@@ -79,7 +79,7 @@ image to [DockerHub](https://hub.docker.com/).
 
        # Define the steps
        steps:
-        # Checkout the codebase
+         # Checkout the codebase
          - name: Checkout
            uses: actions/checkout@v3
 
@@ -119,57 +119,57 @@ image to [DockerHub](https://hub.docker.com/).
                console.log('create', create)
                return create.data.number
 
-           # Build and push container
-           - name: Build and Push
-             uses: docker/build-push-action@v4
-             with:
-               context: .
-               file: ./Dockerfile
-               push: true
-               tags: |
-                 DOCKER_ORG/demo-action:latest
-                 DOCKER_ORG/demo-action:v1
+         # Build and push container
+         - name: Build and Push
+           uses: docker/build-push-action@v4
+           with:
+             context: .
+             file: ./Dockerfile
+             push: true
+             tags: |
+               DOCKER_ORG/demo-action:latest
+               DOCKER_ORG/demo-action:v1
 
-           # Update deployment status
-           - name: Update Deployment Status
-             uses: bobheadxi/deployments@v1
-             if: always()
-             with:
-               step: finish
-               token: ${{ secrets.GITHUB_TOKEN }}
-               status: ${{ job.status }}
-               deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-               env_url: https://github.com/orgs/${{github.repository_owner}}/packages?repo_name=${{github.repository.name}}
+         # Update deployment status
+         - name: Update Deployment Status
+           uses: bobheadxi/deployments@v1
+           if: always()
+           with:
+             step: finish
+             token: ${{ secrets.GITHUB_TOKEN }}
+             status: ${{ job.status }}
+             deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+             env_url: https://github.com/orgs/${{github.repository_owner}}/packages?repo_name=${{github.repository.name}}
 
-           # Update issue status (success)
-           - name: Update issue success
-             uses: actions/github-script@v6
-             if: success()
-             with:
-               github-token: ${{secrets.GITHUB_TOKEN}}
-               script: |
-                 github.rest.issues.createComment({
-                   owner: context.repo.owner,
-                   repo: context.repo.repo,
-                   issue_number: '${{ steps.create-issue.outputs.result }}',
-                   title: 'New issue created',
-                   body: 'Successful!y deployed production'
-                 })
+         # Update issue status (success)
+         - name: Update issue success
+           uses: actions/github-script@v6
+           if: success()
+           with:
+             github-token: ${{secrets.GITHUB_TOKEN}}
+             script: |
+               github.rest.issues.createComment({
+                 owner: context.repo.owner,
+                 repo: context.repo.repo,
+                 issue_number: '${{ steps.create-issue.outputs.result }}',
+                 title: 'New issue created',
+                 body: 'Successful!y deployed production'
+               })
 
-           # Update issue status (failure)
-           - name: Update issue failure
-             uses: actions/github-script@v6
-             if: failure()
-             with:
-               github-token: ${{secrets.GITHUB_TOKEN}}
-               script: |
-                 github.rest.issues.createComment({
-                   owner: context.repo.owner,
-                   repo: context.repo.repo,
-                   issue_number: '${{ steps.create-issue.outputs.result }}',
-                   title: 'New issue created',
-                   body: 'Failed to deploy to production'
-                 })
+         # Update issue status (failure)
+         - name: Update issue failure
+           uses: actions/github-script@v6
+           if: failure()
+           with:
+             github-token: ${{secrets.GITHUB_TOKEN}}
+             script: |
+               github.rest.issues.createComment({
+                 owner: context.repo.owner,
+                 repo: context.repo.repo,
+                 issue_number: '${{ steps.create-issue.outputs.result }}',
+                 title: 'New issue created',
+                 body: 'Failed to deploy to production'
+               })
    ```
 
 3. Commit the file
