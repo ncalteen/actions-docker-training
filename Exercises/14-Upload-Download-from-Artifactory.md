@@ -13,7 +13,7 @@ also use the
 [JFROG CLI Action](https://github.com/marketplace/actions/jfrog-cli) to connect
 to Artifactory and run various CLI commands.
 
-## Create Artifactory credential secrets
+## Create GitHub Actions Secrets
 
 Before we can interact with Artifactory, GitHub Actions needs credentials to
 access the service. In this step, we will create several secrets that will be
@@ -42,7 +42,7 @@ Complete the following set of steps for each of the listed secrets:
 | `ACCESS_TOKEN`     | `ABC123`                                          | (`access-token` authentication) The access token to use with Artifactory  |
 | `API_KEY`          | `DEF456`                                          | (`api-key` authentication) The API key to use with Artifactory            |
 
-## Update the Continuous Integration workflow
+## Update the Continuous Integration Workflow
 
 1. Create a branch named `artifactory`
 

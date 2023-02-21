@@ -23,8 +23,8 @@ pushing a new Gem to the GitHub Packages registry.
    git checkout -b packages
    ```
 
-2. In the `.github/workflows/` directory, create a file named `package.yml` and
-   with the following contents
+2. In the `.github/workflows/` directory, create a file named `package.yml` with
+   the following contents
 
    ```yaml
    name: GitHub Package Registry
