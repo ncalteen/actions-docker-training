@@ -101,7 +101,7 @@ image to [DockerHub](https://hub.docker.com/).
            with:
              step: start
              token: ${{ secrets.GITHUB_TOKEN }}
-             env: Production
+             env: production
 
          # Create an issue with build info
          - name: Create Issue
@@ -137,6 +137,7 @@ image to [DockerHub](https://hub.docker.com/).
              status: ${{ job.status }}
              deployment_id: ${{ steps.deployment.outputs.deployment_id }}
              env_url: https://github.com/orgs/${{github.repository_owner}}/packages?repo_name=${{github.repository.name}}
+             env: production
 
          # Update issue status (success)
          - name: Update issue success
