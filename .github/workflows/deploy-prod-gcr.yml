@@ -1,0 +1,124 @@
+name: GCR Production
+
+on:
+  # Start the job on push
+  push:
+    # Don't run on push to main
+    branches-ignore:
+      - 'main'
+
+jobs:
+  # Release to GCR
+  gcr-prod-release:
+    # Name the job
+    name: Release to GCR
+
+    # Set the platform to run on
+    runs-on: ubuntu-latest
+
+    # Define the steps
+    steps:
+      # Set the deployment status to started
+      - name: Start Deployment
+        id: deployment
+        uses: bobheadxi/deployments@v1
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: production
+
+      # Checkout the codebase
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Build the image
+      - name: Build Image
+        run:
+          docker build . --file Dockerfile --tag "${{
+          github.event.repository.name }}"  --label "runnumber=${{ github.run_id
+          }}"
+
+      # Log in to GCR
+      - name: Log in to GCR
+        run:
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $
+          --password-stdin
+
+      # Create an issue with build info
+      - name: Create Issue
+        id: create-issue
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const create = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'Deploying to production',
+              body: 'Currently deploying...'
+            })
+            console.log('create', create)
+            return create.data.number
+
+      # Push image to GCR
+      - name: Push Image
+        run: |
+          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}
+
+          # Change all uppercase to lowercase
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+
+          # Strip Git ref prefix from version
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+
+          # Strip "v" prefix from tag name
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+
+          # Use Docker `latest` tag convention
+          [ "$VERSION" == "master" ] && VERSION=latest
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$VERSION
+          docker tag ${{ github.event.repository.name }} $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:$VERSION
+
+      # Update deployment status
+      - name: Update Deployment Status
+        uses: bobheadxi/deployments@v1
+        if: always()
+        with:
+          step: finish
+          token: ${{ secrets.GITHUB_TOKEN }}
+          status: ${{ job.status }}
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          env_url: https://github.com/orgs/${{github.repository_owner}}/packages?repo_name=${{github.repository.name}}
+          env: production
+
+      # Update issue status (success)
+      - name: Update issue success
+        uses: actions/github-script@v6
+        if: success()
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: '${{ steps.create-issue.outputs.result }}',
+              title: 'New issue created',
+              body: 'Successful!y deployed production'
+            })
+
+      # Update issue status (failure)
+      - name: Update issue failure
+        uses: actions/github-script@v6
+        if: failure()
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: '${{ steps.create-issue.outputs.result }}',
+              title: 'New issue created',
+              body: 'Failed to deploy to production'
+            })
