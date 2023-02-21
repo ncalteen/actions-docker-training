@@ -56,17 +56,16 @@ contents and structures in this repository.
 
 ### Task 7: Continuous Deployment (CD)
 
-- [Step 16: Create CD Actions](./16-Create-CD-Actions.md)
-- [Step 17: Deploy a Docker Image](./17-Deploy-Docker.md)
-- [Step 18: Deploy a Release Image](./18-Deploy-Release.md)
+- [Step 16: Deploy a Docker Image](./17-Deploy-Docker.md)
+- [Step 17: Deploy a Release Image](./18-Deploy-Release.md)
 
 ### (Optional) Using GitHub Actions Beyond CI/CT/CD
 
-- [Step 19: Use GitHub Script to Create Issues](./19-Create-Issues.md)
-- [Step 20: Use GitHub's Deployment API to Update Environments](./20-Deployment-API.md)
-- [Step 21: (**Advanced**) Add Dependencies Between Jobs](./21-Wait-for-Jobs.md)
-- [Step 22: (**Advanced**) Split Jobs for Faster Workflows](./22-Split-Jobs.md)
-- [Step 23: (**Advanced**) Reuse a Local Action](./23-Reuse-Local-Action.md)
+- [Step 18: Use GitHub Script to Create Issues](./19-Create-Issues.md)
+- [Step 19: Use GitHub's Deployment API to Update Environments](./20-Deployment-API.md)
+- [Step 20: (**Advanced**) Add Dependencies Between Jobs](./21-Wait-for-Jobs.md)
+- [Step 21: (**Advanced**) Split Jobs for Faster Workflows](./22-Split-Jobs.md)
+- [Step 22: (**Advanced**) Reuse a Local Action](./23-Reuse-Local-Action.md)
 
 ## :book: Additional Resources
 
