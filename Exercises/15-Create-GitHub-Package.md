@@ -69,8 +69,26 @@ pushing a new Gem to the GitHub Packages registry.
              touch ~/.gem/credentials
              chmod 0600 ~/.gem/credentials
              echo ":github: Bearer ${{ secrets.GITHUB_TOKEN }}" >> ~/.gem/credentials
-             gem push --key github --host https://rubygems.pkg.github.com/${{ github.epository_owner }} ${{ github.event.repository.name }}-0.0.${{ github.run_id }}.gem
+             gem push --key github --host https://rubygems.pkg.github.com/${{ github.repository_owner }} ${{ github.event.repository.name }}-0.0.${{ github.run_id }}.gem
    ```
+
+3. Commit the file
+
+   ```bash
+   git add .
+   git commit -m 'Add RubyGem package workflow'
+   ```
+
+4. Open a pull request and merge the `packages` branch into the `main` branch,
+   making sure to delete the `packages` branch after doing so
+
+   In the pull request, you will see the _GitHub Package Registry / Build Ruby
+   Gem_ job running and the results when it completes.
+
+   Once it completes, the _Continuous Integration / Download from Artifactory_
+   job will start. You can review the logs of the run and the steps it took by
+   selecting **Details** next to the action. You can experiment with this action
+   by making additional updates to the code and committing it.
 
 ## Reference
 
