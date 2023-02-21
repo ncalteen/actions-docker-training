@@ -64,8 +64,7 @@ contents and structures in this repository.
 - [Step 18: Use GitHub Script to Create Issues](./18-Create-Issues.md)
 - [Step 19: Use GitHub's Deployment API to Update Environments](./19-Deployment-API.md)
 - [Step 20: (**Advanced**) Conditional Steps](./20-Conditional-Steps.md)
-- [Step 21: (**Advanced**) Split Jobs for Faster Workflows](./21-Split-Jobs.md)
-- [Step 22: (**Advanced**) Reuse a Local Action](./22-Reuse-Local-Action.md)
+- [Step 21: (**Advanced**) Reuse a Local Action](./21-Reuse-Local-Action.md)
 
 ## :book: Additional Resources
 

@@ -15,3 +15,13 @@ you are building_ and _how often you are building it_.
   developer events will help you deliver faster and with less risk.
 
 The examples we have will help solve most of the use cases.
+
+# Split Jobs for Faster Workflows
+
+As you can see, some steps take much time, and others are fairly quick. As you
+progress though your knowledge of **GitHub Actions**, you should be able to
+split up jobs and steps, and set up advanced wait conditions to help speed up
+your pipelines.
+
+By doing so, you make sure you get reliable, and instant feedback from your
+build process.
