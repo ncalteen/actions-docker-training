@@ -72,6 +72,16 @@ pushing a new Gem to the GitHub Packages registry.
              gem push --key github --host https://rubygems.pkg.github.com/${{ github.epository_owner }} ${{ github.event.repository.name }}-0.0.${{ github.run_id }}.gem
    ```
 
+3. Commit the file
+
+   ```bash
+   git add .
+   git commit -m 'Add RubyGem package workflow'
+   ```
+
+4. Open a pull request and merge the `packages` branch into the `main` branch,
+   making sure to delete the `packages` branch after doing so
+
 ## Reference
 
 - [Create your own gem](https://guides.rubygems.org/make-your-own-gem/)

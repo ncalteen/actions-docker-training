@@ -1,0 +1,43 @@
+name: GitHub Package Registry
+
+on:
+  # Start the job on push
+  push:
+    # Don't run on push to main
+    branches-ignore:
+      - 'main'
+
+jobs:
+  # Build a Ruby gem
+  build-gem:
+    # Name the Job
+    name: Build Ruby Gem
+
+    # Set the platform to run on
+    runs-on: ubuntu-latest
+
+    # Define the steps
+    steps:
+      # Checkout the codebase
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Update the .gemspec file with the Gem name and version
+      - name: Update .gemspec
+        run: |
+          sed -i "s/\[\[GEM_NAME\]\]/${{ github.event.repository.name }}/g" hello_world.gemspec
+          sed -i "s/\[\[GEM_VERSION\]\]/${{ github.run_id }}/g" hello_world.gemspec
+          cat hello_world.gemspec
+
+      # Build the Gem
+      - name: Build Gem
+        run: gem build hello_world.gemspec
+
+      # Authenticate to the GitHub Packages registry
+      - name: Authenticate to GitHub Packages Registry
+        run: |
+          mkdir ~/.gem
+          touch ~/.gem/credentials
+          chmod 0600 ~/.gem/credentials
+          echo ":github: Bearer ${{ secrets.GITHUB_TOKEN }}" >> ~/.gem/credentials
+          gem push --key github --host https://rubygems.pkg.github.com/${{ github.epository_owner }} ${{ github.event.repository.name }}-0.0.${{ github.run_id }}.gem
