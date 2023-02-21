@@ -74,8 +74,8 @@ image and load it into the Docker service in the action's runtime.
        # Name the job
        name: Download Container
 
-       # Must run after the CI job
-       needs: CI
+       # Must run after the build job
+       needs: build
 
        # Set the platform to run on
        runs-on: ubuntu-latest
