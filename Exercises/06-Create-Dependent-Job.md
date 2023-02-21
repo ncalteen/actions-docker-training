@@ -17,7 +17,7 @@ that certain jobs will not start until others complete successfully.
    name: Dependent Jobs
 
    on:
-     # Start the job on push
+     # Start the workflow on push
      push:
        # Don't run on push to main
        branches-ignore:

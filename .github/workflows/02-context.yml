@@ -1,7 +1,7 @@
 name: Output GitHub Actions Contexts
 
 #############################
-# Start the job on push     #
+# Start the workflow on push     #
 # Don't run on push to main #
 #############################
 on:

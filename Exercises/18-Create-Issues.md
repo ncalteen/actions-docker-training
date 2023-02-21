@@ -1,84 +1,97 @@
 # Use GitHub Script to Create Issues
 
 The [GitHub Script Action](https://github.com/marketplace/actions/github-script)
-is a very powerful **Github Action** that can be used in your workflows.
+is a uses [Octokit](https://github.com/octokit/rest.js) to make calling GitHub's
+REST API easy and repeatable. With this action, you can manage issues, create
+releases, update endpoints, and more. This exercise is a simple example of
+creating and updating an issue using GitHub Scripts.
 
-It uses [Octokit](https://github.com/octokit/rest.js/) to help make calling
-GitHub API's easy and repeatable. With this information, you can then create
-issues, create releases, update endpoints, etc. Below is a simple example of
-creating and updating an issue using the tooling.
+1. Create a new branch named `script`
 
-### Exercise: Add GitHub Scripts
+   ```bash
+   git checkout -b script
+   ```
 
-1. Create a new branch called `Scripts`
-1. Create a new file named `.github/workflows/create-issue.yml`
-1. Copy the code below to the newly created file:
+2. In the `.github/workflows/` directory, create a file named `create-issue.yml`
+   with the following contents
 
    ```yaml
-   # This is a basic workflow to help you get started with Actions
-
    name: Create Issue
 
-   # Controls when the action will run.
    on:
-     # Triggers the workflow on push or pull request events but only for the main branch
+     # Start the workflow on push
      push:
-       branches-ignore: main
-     # Allows you to run this workflow manually from the Actions tab
+       # Don't run on push to main
+       branches-ignore:
+         - 'main'
+     # Run the workflow manually
      workflow_dispatch:
 
-   # A workflow run is made up of one or more jobs that can run sequentially or in parallel
    jobs:
-     # This workflow contains a single job called "build"
      build:
-       # The type of runner that the job will run on
+       # Set the platform to run on
        runs-on: ubuntu-latest
 
-       # Steps represent a sequence of tasks that will be executed as part of the job
+       # Define the steps
        steps:
-         # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-         - uses: actions/checkout@v2
+         # Checkout the codebase
+         - name: Checkout
+           uses: actions/checkout@v3
 
-         # Runs a single command using the runners shell
-         - name: Run a one-line script
-           run: echo Hello, world!
+         # Run a single command using the runner's shell
+         - name: Run Command
+           run: echo 'Hello, World!'
 
-         - name: Create issue
+         # Create an issue
+         - name: Create Issue
            uses: actions/github-script@v6
            id: create-issue
            with:
-             # https://octokit.github.io/rest.js/v18#issues-create
              github-token: ${{secrets.GITHUB_TOKEN}}
              script: |
                const create = await github.rest.issues.create({
                  owner: context.repo.owner,
                  repo: context.repo.repo,
-                 title: "New issue created",
+                 title: 'New issue created',
                  body: 'Heres some base data'
                })
                console.log('create', create)
                return create.data.number
 
-         - name: Update issue
+         # Update the issue
+         # Uses the issue number from the previous step
+         - name: Update Issue
            uses: actions/github-script@v6
            with:
-             # https://octokit.github.io/rest.js/v18#issues-create
              github-token: ${{secrets.GITHUB_TOKEN}}
              script: |
                github.rest.issues.createComment({
                  owner: context.repo.owner,
                  repo: context.repo.repo,
                  issue_number: "${{ steps.create-issue.outputs.result }}",
-                 title: "New issue created",
+                 title: 'New issue created',
                  body: 'Adding a comment!'
                })
    ```
 
-1. Commit the file.
-1. Open a pull request with the `Scripts` branch into the `main` branch.
-1. Merge the pull request.
+3. Commit the file
 
-### Linage
+   ```bash
+   git add .
+   git commit -m "Add GitHub Script workflow"
+   ```
+
+4. Open a pull request and merge the `script` branch into the `main` branch,
+   making sure to delete the `script` branch after doing so
+
+   In the pull request, you will see the _Create Issue_ workflow running and the
+   results when it completes. You can review the logs of the run and the steps
+   it took by selecting **Details** next to the action. You can experiment with
+   this action by making additional updates to the code and committing it.
+   Additionally, a new issue will be created in the **Issues** tab of the
+   repository.
+
+## Reference
 
 - [GitHub Script Action](https://github.com/marketplace/actions/github-script)
-- [Octokit Create Issue doc](https://octokit.github.io/rest.js/v18#issues-create)
+- [Octokit Create Issue Documentation](https://octokit.github.io/rest.js#issues-create)

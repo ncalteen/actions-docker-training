@@ -19,7 +19,7 @@ itself and any job(s) or step(s) it defines.
    name: Output GitHub Actions Contexts
 
    on:
-     # Start the job on push
+     # Start the workflow on push
      push:
        # Don't run on push to main
        branches-ignore:

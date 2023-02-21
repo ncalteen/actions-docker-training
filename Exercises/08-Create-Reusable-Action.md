@@ -78,7 +78,7 @@ workflow that uses the custom action.
    name: Centralized Action
 
    on:
-     # Start the job on push
+     # Start the workflow on push
      push:
        # Don't run on push to main
        branches-ignore:

@@ -21,7 +21,7 @@ provide feedback on any potential security risks.
    name: CodeQL Security Analysis
 
    on:
-     # Start the job on push
+     # Start the workflow on push
      push:
        # Don't run on push to main
        branches-ignore:

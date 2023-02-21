@@ -63,7 +63,7 @@ image to [DockerHub](https://hub.docker.com/).
    name: DockerHub Production
 
    on:
-     # Start the job on push
+     # Start the workflow on push
      push:
        # Don't run on push to main
        branches-ignore:
@@ -211,7 +211,7 @@ image to [DockerHub](https://hub.docker.com/).
    name: GCR Production
 
    on:
-     # Start the job on push
+     # Start the workflow on push
      push:
        # Don't run on push to main
        branches-ignore:
@@ -371,7 +371,7 @@ image to [DockerHub](https://hub.docker.com/).
    name: ECR Production
 
    on:
-     # Start the job on push
+     # Start the workflow on push
      push:
        # Don't run on push to main
        branches-ignore:

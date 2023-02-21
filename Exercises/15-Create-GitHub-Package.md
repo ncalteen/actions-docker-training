@@ -30,7 +30,7 @@ pushing a new Gem to the GitHub Packages registry.
    name: GitHub Package Registry
 
    on:
-     # Start the job on push
+     # Start the workflow on push
      push:
        # Don't run on push to main
        branches-ignore:

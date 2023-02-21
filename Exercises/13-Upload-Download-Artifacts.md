@@ -23,7 +23,7 @@ image and load it into the Docker service in the action's runtime.
    name: Continuous Integration
 
    on:
-     # Start the job on push
+     # Start the workflow on push
      push:
        # Don't run on push to main
        branches-ignore:

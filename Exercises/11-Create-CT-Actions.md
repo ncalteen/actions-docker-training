@@ -21,7 +21,7 @@ changes to the code and run a linter against it to ensure code sanity.
    name: Continuous Testing
 
    on:
-     # Start the job on push
+     # Start the workflow on push
      push:
        # Don't run on push to main
        branches-ignore:
