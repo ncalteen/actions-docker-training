@@ -46,7 +46,7 @@ deployment fails so that your team can track their troubleshooting steps.
          id: wait-for-release
          with:
            token: ${{ secrets.GITHUB_TOKEN }}
-           checkName: release
+           checkName: Release
            ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
        # Do something if the deployment was successful

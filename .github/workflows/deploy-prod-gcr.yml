@@ -11,7 +11,7 @@ jobs:
   # Release to GCR
   release:
     # Name the job
-    name: Release to GCR
+    name: Release
 
     # Set the platform to run on
     runs-on: ubuntu-latest
@@ -122,3 +122,31 @@ jobs:
               title: 'New issue created',
               body: 'Failed to deploy to production'
             })
+
+  check-status:
+    # Name the job
+    name: Check Release Status
+
+    # Set the platform to run on
+    runs-on: ubuntu-latest
+
+    # Define the steps
+    steps:
+      # Wait for release to finish
+      - name: Wait for Release
+        uses: fountainhead/action-wait-for-check@v1.1.0
+        id: wait-for-release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          checkName: Release
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      # Do something if the deployment was successful
+      - name: Success Step
+        if: steps.wait-for-release.outputs.conclusion == 'success'
+        run: echo "We have success"
+
+      # Do something if the deployment failed
+      - name: Failure Step
+        if: steps.wait-for-release.outputs.conclusion == 'failure'
+        run: echo "ERROR! Release failure!
