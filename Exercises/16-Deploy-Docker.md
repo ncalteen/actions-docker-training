@@ -126,9 +126,6 @@ image to [DockerHub](https://hub.docker.com/).
              context: .
              file: ./Dockerfile
              push: true
-             tags: |
-               DOCKER_ORG/demo-action:latest
-               DOCKER_ORG/demo-action:v1
 
          # Update deployment status
          - name: Update Deployment Status
@@ -182,11 +179,10 @@ image to [DockerHub](https://hub.docker.com/).
 4. Open a pull request and merge the `dockerhub` branch into the `main` branch,
    making sure to delete the `dockerhub` branch after doing so
 
-   In the pull request, you will see the _Continuous Integration_ workflow
-   running and the results when it completes. You can review the logs of the run
-   and the steps it took by selecting **Details** next to the action. You can
-   experiment with this action by making additional updates to the code and
-   committing it.
+   In the pull request, you will see the _DockerHub Production_ workflow running
+   and the results when it completes. You can review the logs of the run and the
+   steps it took by selecting **Details** next to the action. You can experiment
+   with this action by making additional updates to the code and committing it.
 
 ---
 
