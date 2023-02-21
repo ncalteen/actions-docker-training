@@ -69,8 +69,8 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            user/demo-action:latest
-            user/demo-action:v1
+            ${{ github.actor }}/demo-action:latest
+            ${{ github.actor }}/demo-action:v1
 
       # Update deployment status
       - name: Update Deployment Status
