@@ -20,15 +20,15 @@ access the service. In this step, we will create several secrets that will be
 used to authenticate with Artifactory.
 
 1. Open this repository on GitHub.com and navigate to the **Settings** tab
-2. In the **Security** section, expand **Secrets and variables**
-3. Select **Actions**
+1. In the **Security** section, expand **Secrets and variables**
+1. Select **Actions**
 
 Complete the following set of steps for each of the listed secrets:
 
 1. Select **New repository secret**
-2. In the **Name** text field, enter the name of the secret (the `Name` column
+1. In the **Name** text field, enter the name of the secret (the `Name` column
    in the table below)
-3. In the **Secret** text field, enter the value of the secret (examples are
+1. In the **Secret** text field, enter the value of the secret (examples are
    provided in the the `Example` column in the table below)
 
 | Name               | Value                                             | Description                                                               |
@@ -50,7 +50,7 @@ Complete the following set of steps for each of the listed secrets:
    git checkout -b artifactory
    ```
 
-2. In the `.github/workflows/` directory, open the file named `ci.yml` and
+1. In the `.github/workflows/` directory, open the file named `ci.yml` and
    update it to the following contents
 
    > **Note:** Please update the path to an artifact that was created in the
@@ -210,14 +210,14 @@ Complete the following set of steps for each of the listed secrets:
            API_KEY: ${{ secrets.API_KEY }}
    ```
 
-3. Commit the file
+1. Commit the file
 
    ```bash
    git add .
    git commit -m 'Add artifactory jobs'
    ```
 
-4. Open a pull request and merge the `artifactory` branch into the `main`
+1. Open a pull request and merge the `artifactory` branch into the `main`
    branch, making sure to delete the `artifactory` branch after doing so
 
    In the pull request, you will see the _Continuous Integration / Upload to

@@ -14,7 +14,7 @@ provide feedback on any potential security risks.
    git checkout -b security
    ```
 
-2. In the `.github/workflows/` directory, create a file named `security.yml`
+1. In the `.github/workflows/` directory, create a file named `security.yml`
    with the following contents
 
    ```yml
@@ -56,14 +56,14 @@ provide feedback on any potential security risks.
            uses: github/codeql-action/analyze@v2
    ```
 
-3. Commit the file
+1. Commit the file
 
    ```bash
    git add .
    git commit -m 'Add security workflow'
    ```
 
-4. Open a pull request and merge the `security` branch into the `main` branch,
+1. Open a pull request and merge the `security` branch into the `main` branch,
    making sure to delete the `security` branch after doing so
 
    In the pull request, you will see the _CodeQL Security Analysis_ workflow

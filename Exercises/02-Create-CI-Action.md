@@ -17,19 +17,19 @@ successfully.
    git checkout -b ci
    ```
 
-2. In the root of the repository, create a new directory named `.github`
+1. In the root of the repository, create a new directory named `.github`
 
    ```bash
    mkdir .github
    ```
 
-3. In the `.github` directory, create a new directory named `workflows`
+1. In the `.github` directory, create a new directory named `workflows`
 
    ```bash
    mkdir .github/workflows
    ```
 
-4. In the `.github/workflows/` directory, create a file named `ci.yml` with the
+1. In the `.github/workflows/` directory, create a file named `ci.yml` with the
    following contents
 
    ```yaml
@@ -73,14 +73,14 @@ successfully.
              push: false
    ```
 
-5. Commit the file
+1. Commit the file
 
    ```bash
    git add .
    git commit -m "Add CI workflow"
    ```
 
-6. Open a pull request and merge the `ci` branch into the `main` branch, making
+1. Open a pull request and merge the `ci` branch into the `main` branch, making
    sure to delete the `ci` branch after doing so
 
    In the pull request, you will see the _Continuous Integration_ workflow

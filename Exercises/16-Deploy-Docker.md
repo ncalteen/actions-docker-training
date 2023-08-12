@@ -13,15 +13,15 @@ that will be used to authenticate with the registries used in this exercise.
 > work with.
 
 1. Open this repository on GitHub.com and navigate to the **Settings** tab
-2. In the **Security** section, expand **Secrets and variables**
-3. Select **Actions**
+1. In the **Security** section, expand **Secrets and variables**
+1. Select **Actions**
 
 Complete the following set of steps for each of the listed secrets:
 
 1. Select **New repository secret**
-2. In the **Name** text field, enter the name of the secret (the `Name` column
+1. In the **Name** text field, enter the name of the secret (the `Name` column
    in the table below)
-3. In the **Secret** text field, enter the value of the secret (examples are
+1. In the **Secret** text field, enter the value of the secret (examples are
    provided in the the `Example` column in the table below)
 
 | Name                    | Value                                          | Description                                           |
@@ -46,7 +46,7 @@ image to [DockerHub](https://hub.docker.com/).
    git checkout -b dockerhub
    ```
 
-2. In the `.github/workflows/` directory, create a file named
+1. In the `.github/workflows/` directory, create a file named
    `deploy-prod-docker.yml` with the following contents
 
    > **Note:** This workflow assumes your DockerHub username matches your
@@ -147,14 +147,14 @@ image to [DockerHub](https://hub.docker.com/).
                })
    ```
 
-3. Commit the file
+1. Commit the file
 
    ```bash
    git add .
    git commit -m "Add DockerHub deployment workflow"
    ```
 
-4. Open a pull request and merge the `dockerhub` branch into the `main` branch,
+1. Open a pull request and merge the `dockerhub` branch into the `main` branch,
    making sure to delete the `dockerhub` branch after doing so
 
    In the pull request, you will see the _DockerHub Production_ workflow running
@@ -177,7 +177,7 @@ image to [DockerHub](https://hub.docker.com/).
    git checkout -b gcr
    ```
 
-2. In the `.github/workflows/` directory, create a file named
+1. In the `.github/workflows/` directory, create a file named
    `deploy-prod-gcr.yml` with the following contents
 
    ```yaml
@@ -286,14 +286,14 @@ image to [DockerHub](https://hub.docker.com/).
                })
    ```
 
-3. Commit the file
+1. Commit the file
 
    ```bash
    git add .
    git commit -m "Add GCR deployment workflow"
    ```
 
-4. Open a pull request and merge the `gcr` branch into the `main` branch, making
+1. Open a pull request and merge the `gcr` branch into the `main` branch, making
    sure to delete the `gcr` branch after doing so
 
    In the pull request, you will see the _GCR Production_ workflow running and
@@ -316,7 +316,7 @@ image to [DockerHub](https://hub.docker.com/).
    git checkout -b gcr
    ```
 
-2. In the `.github/workflows/` directory, create a file named
+1. In the `.github/workflows/` directory, create a file named
    `deploy-prod-ecr.yml` with the following contents
 
    ```yaml
@@ -419,14 +419,14 @@ image to [DockerHub](https://hub.docker.com/).
                })
    ```
 
-3. Commit the file
+1. Commit the file
 
    ```bash
    git add .
    git commit -m "Add ECR deployment workflow"
    ```
 
-4. Open a pull request and merge the `ecr` branch into the `main` branch, making
+1. Open a pull request and merge the `ecr` branch into the `main` branch, making
    sure to delete the `ecr` branch after doing so
 
    In the pull request, you will see the _ECR Production_ workflow running and

@@ -34,7 +34,7 @@ several languages.
    git checkout -b python-deps
    ```
 
-2. In the `dependencies/` directory, create a file named `Pipfile.lock` with the
+1. In the `dependencies/` directory, create a file named `Pipfile.lock` with the
    following contents
 
    ```json
@@ -123,14 +123,14 @@ several languages.
    }
    ```
 
-3. Commit the file
+1. Commit the file
 
    ```bash
    git add .
    git commit -m 'Add Python lock file'
    ```
 
-4. Open a pull request and merge the `python-deps` branch into the `main`
+1. Open a pull request and merge the `python-deps` branch into the `main`
    branch, making sure to delete the `python-deps` branch after doing so
 
 ### Node.js
@@ -141,7 +141,7 @@ several languages.
    git checkout -b node-deps
    ```
 
-2. In the `dependencies/` directory, create a file named `package-lock.json`
+1. In the `dependencies/` directory, create a file named `package-lock.json`
    with the following contents
 
    ```json
@@ -462,14 +462,14 @@ several languages.
    }
    ```
 
-3. Commit the file
+1. Commit the file
 
    ```bash
    git add .
    git commit -m 'Add Node.js lock file'
    ```
 
-4. Open a pull request and merge the `node-deps` branch into the `main` branch,
+1. Open a pull request and merge the `node-deps` branch into the `main` branch,
    making sure to delete the `node-deps` branch after doing so
 
 ### Ruby
@@ -480,7 +480,7 @@ several languages.
    git checkout -b ruby-deps
    ```
 
-2. In the `dependencies/` directory, create a file named `gemfile.lock` with the
+1. In the `dependencies/` directory, create a file named `gemfile.lock` with the
    following contents
 
    ```gem
@@ -545,14 +545,14 @@ several languages.
      2.1.4
    ```
 
-3. Commit the file
+1. Commit the file
 
    ```bash
    git add .
    git commit -m 'Add Ruby lock file'
    ```
 
-4. Open a pull request and merge the `ruby-deps` branch into the `main` branch,
+1. Open a pull request and merge the `ruby-deps` branch into the `main` branch,
    making sure to delete the `ruby-deps` branch after doing so
 
 ## Check for Dependabot Updates
@@ -562,4 +562,4 @@ requests it opened to see if they are still valid. If not, they will be closed
 automatically.
 
 1. Navigate to the **Pull requests** tab of your repository
-2. Select the **Closed** option to see what pull requests Dependabot closed
+1. Select the **Closed** option to see what pull requests Dependabot closed

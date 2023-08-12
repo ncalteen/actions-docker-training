@@ -14,7 +14,7 @@ changes to the code and run a linter against it to ensure code sanity.
    git checkout -b ct
    ```
 
-2. In the `.github/workflows/` directory, create a file named `ct.yml` with the
+1. In the `.github/workflows/` directory, create a file named `ct.yml` with the
    following contents
 
    ```yaml
@@ -54,14 +54,14 @@ changes to the code and run a linter against it to ensure code sanity.
              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
    ```
 
-3. Commit the file
+1. Commit the file
 
    ```bash
    git add .
    git commit -m 'Add linting workflow'
    ```
 
-4. Open a pull request to merge the `ct` branch into the `main` branch
+1. Open a pull request to merge the `ct` branch into the `main` branch
 
    In the pull request, you will see the _Continuous Testing_ workflow running
    and the results when it completes. You can review the logs of the run and the
@@ -70,6 +70,6 @@ changes to the code and run a linter against it to ensure code sanity.
 
    For now, we will ignore Super Linter and merge the pull request.
 
-5. Select **Merge pull request**
-6. Select **Close pull request**
-7. Select **Delete branch**
+1. Select **Merge pull request**
+1. Select **Close pull request**
+1. Select **Delete branch**

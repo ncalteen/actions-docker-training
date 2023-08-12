@@ -12,7 +12,7 @@ creating and updating an issue using GitHub Scripts.
    git checkout -b script
    ```
 
-2. In the `.github/workflows/` directory, create a file named `create-issue.yml`
+1. In the `.github/workflows/` directory, create a file named `create-issue.yml`
    with the following contents
 
    ```yaml
@@ -74,14 +74,14 @@ creating and updating an issue using GitHub Scripts.
                })
    ```
 
-3. Commit the file
+1. Commit the file
 
    ```bash
    git add .
    git commit -m "Add GitHub Script workflow"
    ```
 
-4. Open a pull request and merge the `script` branch into the `main` branch,
+1. Open a pull request and merge the `script` branch into the `main` branch,
    making sure to delete the `script` branch after doing so
 
    In the pull request, you will see the _Create Issue_ workflow running and the
@@ -91,9 +91,9 @@ creating and updating an issue using GitHub Scripts.
    Additionally, a new issue will be created in the **Issues** tab of the
    repository.
 
-5. In your repository, open the **Actions** tab
-6. Select the **Create Issue** action
-7. Select **Run workflow**, then **Run workflow** again
+1. In your repository, open the **Actions** tab
+1. Select the **Create Issue** action
+1. Select **Run workflow**, then **Run workflow** again
 
    This will initiate the workflow again, creating a new issue.
 

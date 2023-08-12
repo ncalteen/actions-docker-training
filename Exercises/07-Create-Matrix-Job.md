@@ -11,7 +11,7 @@ values.
    git checkout -b matrix
    ```
 
-2. In the `.github/workflows/` directory, create a file named `matrix.yml` with
+1. In the `.github/workflows/` directory, create a file named `matrix.yml` with
    the following contents
 
    ```yaml
@@ -49,14 +49,14 @@ values.
              date
    ```
 
-3. Commit the file
+1. Commit the file
 
    ```bash
    git add .
    git commit -m 'Add matrix workflow'
    ```
 
-4. Open a pull request and merge the `matrix` branch into the `main` branch,
+1. Open a pull request and merge the `matrix` branch into the `main` branch,
    making sure to delete the `matrix` branch after doing so
 
    In the pull request, you will see the _Matrix Build_ workflow running and the

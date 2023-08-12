@@ -7,10 +7,10 @@ is up to date and free of known security vulnerabilities.
 ## Enable Dependabot
 
 1. Navigate to your repository on GitHub.com
-2. Select the **Settings** tab
-3. In the **Security** section, select **Code security and analysis**
-4. Enable **Dependabot alerts**
-5. Enable **Dependabot security updates**
+1. Select the **Settings** tab
+1. In the **Security** section, select **Code security and analysis**
+1. Enable **Dependabot alerts**
+1. Enable **Dependabot security updates**
 
 ## Add Dependabot Configuration
 
@@ -20,7 +20,7 @@ is up to date and free of known security vulnerabilities.
    git checkout -b dependabot
    ```
 
-2. In the `.github/` directory, create a file named `dependabot.yml` with the
+1. In the `.github/` directory, create a file named `dependabot.yml` with the
    following contents
 
    ```yaml
@@ -66,14 +66,14 @@ is up to date and free of known security vulnerabilities.
        open-pull-requests-limit: 10
    ```
 
-3. Commit the file
+1. Commit the file
 
    ```bash
    git add .
    git commit -m 'Add dependabot configuration'
    ```
 
-4. Open a pull request and merge the `dependabot` branch into the `main` branch,
+1. Open a pull request and merge the `dependabot` branch into the `main` branch,
    making sure to delete the `dependabot` branch after doing so
 
 ## View Dependabot Alerts
@@ -86,8 +86,8 @@ included in this repository that will generate Dependabot alerts.
 > repository and generate pull requests. Please be patient!
 
 1. Navigate to the **Pull requests** tab of your repository
-2. Select any open pull request with the `dependencies` label
-3. Review the release notes and commit information for the dependency
+1. Select any open pull request with the `dependencies` label
+1. Review the release notes and commit information for the dependency
 
 Feel free to repeat this process for any other open Dependabot pull requests! In
 the next exercise, we will lock our project dependencies to specific versions.

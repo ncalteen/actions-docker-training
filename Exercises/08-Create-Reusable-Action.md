@@ -18,7 +18,7 @@ easily incorporated into workflows that consume the action.
    > [Managing GitHub Actions settings for a repository](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository)
    > for more information.
 
-2. Clone the repository to your local machine
+1. Clone the repository to your local machine
 
    > **:warning: NOTE:** Make sure to run this command outside of this
    > repository!
@@ -27,7 +27,7 @@ easily incorporated into workflows that consume the action.
    git clone git@github.com:ncalteen-learning/centrailized-workflow.git
    ```
 
-3. Create a file named `action.yml` with the following content
+1. Create a file named `action.yml` with the following content
 
    ```yaml
    name: 'Centralized Action'
@@ -38,7 +38,7 @@ easily incorporated into workflows that consume the action.
      main: 'index.js'
    ```
 
-4. Create a file named `index.js` with the following content
+1. Create a file named `index.js` with the following content
 
    ```javascript
    async function run() {
@@ -48,7 +48,7 @@ easily incorporated into workflows that consume the action.
    run()
    ```
 
-5. Commit the files
+1. Commit the files
 
    ```bash
    git add .
@@ -68,7 +68,7 @@ workflow that uses the custom action.
    git checkout -b centralized
    ```
 
-2. In the `.github/workflows/` directory, create a file named `centralized.yml`
+1. In the `.github/workflows/` directory, create a file named `centralized.yml`
    with the following contents
 
    > **:warning: NOTE:** Make sure to replace OWNER with your GitHub username or
@@ -95,14 +95,14 @@ workflow that uses the custom action.
            uses: OWNER/centralized-workflow@main
    ```
 
-3. Commit the file
+1. Commit the file
 
    ```bash
    git add .
    git commit -m 'Add centralized action workflow'
    ```
 
-4. Open a pull request and merge the `centralized` branch into the `main`
+1. Open a pull request and merge the `centralized` branch into the `main`
    branch, making sure to delete the `centralized` branch after doing so
 
    In the pull request, you will see the _Centralized Action_ workflow running

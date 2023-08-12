@@ -12,7 +12,7 @@ itself and any job(s) or step(s) it defines.
    git checkout -b context
    ```
 
-2. In the `.github/workflows/` directory, create a file named `context.yml` with
+1. In the `.github/workflows/` directory, create a file named `context.yml` with
    the following contents
 
    ```yaml
@@ -58,14 +58,14 @@ itself and any job(s) or step(s) it defines.
            run: echo "$MATRIX_CONTEXT"
    ```
 
-3. Commit the file
+1. Commit the file
 
    ```bash
    git add .
    git commit -m 'Add context workflow'
    ```
 
-4. Open a pull request and merge the `context` branch into the `main` branch,
+1. Open a pull request and merge the `context` branch into the `main` branch,
    making sure to delete the `context` branch after doing so
 
    In the pull request, you will see the _Output GitHub Actions Contexts_

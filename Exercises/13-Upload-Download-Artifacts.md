@@ -16,7 +16,7 @@ image and load it into the Docker service in the action's runtime.
    git checkout -b artifacts
    ```
 
-2. In the `.github/workflows/` directory, open the file named `ci.yml` and
+1. In the `.github/workflows/` directory, open the file named `ci.yml` and
    update it to the following contents
 
    ```yaml
@@ -100,41 +100,41 @@ image and load it into the Docker service in the action's runtime.
              docker image ls -a
    ```
 
-3. Commit the file
+1. Commit the file
 
    ```bash
    git add .
    git commit -m 'Add upload/download jobs'
    ```
 
-4. Open a pull request and merge the `artifacts` branch into the `main` branch
+1. Open a pull request and merge the `artifacts` branch into the `main` branch
 
    > **:warning: NOTE:** Make sure **not** to delete the `artifacts` branch
    > after merging your pull request. The new action we created won't run until
    > it is merged into `main`. Next, we will create another pull request to test
    > the new action.
 
-5. Synchronize your local repository with the remote
+1. Synchronize your local repository with the remote
 
    ```bash
    git pull
    ```
 
-6. In the `library/` directory, open the file named `entrypoint.sh` and add the
+1. In the `library/` directory, open the file named `entrypoint.sh` and add the
    following line to the bottom
 
    ```bash
    echo "Goodbye from the container!"
    ```
 
-7. Commit the file
+1. Commit the file
 
    ```bash
    git add .
    git commit -m 'Update Dockerfile'
    ```
 
-8. Open a pull request and merge the `artifacts` branch into the `main` branch,
+1. Open a pull request and merge the `artifacts` branch into the `main` branch,
    making sure to delete the `artifacts` branch after doing so
 
    In the pull request, you will see the _Continuous Integration / Upload

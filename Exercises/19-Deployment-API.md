@@ -26,11 +26,11 @@ Actions or other external services.
    git checkout -b deployment-api
    ```
 
-2. Open one of the following workflow files you created previously:
+1. Open one of the following workflow files you created previously:
    - `deploy-prod-docker.yml`
    - `deploy-prod-gcr.yml`
    - `deploy-prod-ecr.yml`
-3. Add the following as the **first** step in the workflow
+1. Add the following as the **first** step in the workflow
 
    ```yml
    # Set the deployment status to started
@@ -43,7 +43,7 @@ Actions or other external services.
        env: production
    ```
 
-4. Add the following as the **last** step in the workflow
+1. Add the following as the **last** step in the workflow
 
    ```yml
    # Update deployment status
@@ -59,23 +59,23 @@ Actions or other external services.
        env: production
    ```
 
-5. Commit the file
+1. Commit the file
 
    ```bash
    git add .
    git commit -m "Add deployment status updates"
    ```
 
-6. Open a pull request and merge the `deployment-api` branch into the `main`
+1. Open a pull request and merge the `deployment-api` branch into the `main`
    branch, making sure to delete the `deployment-api` branch after doing so
 
    When the workflow starts, you will see a notification in the pull request
    that the branch is being deployed. When the workflow completes, you will see
    a notification that the deployment was successful.
 
-7. In your repository, select the **Code** tab
-8. In the right section, select the **production** environment
-9. Select **View deployment**
+1. In your repository, select the **Code** tab
+1. In the right section, select the **production** environment
+1. Select **View deployment**
 
    Here you will be directed to the destination of the deployment. In this
    exercise, this is the list of "production-ready" container images that have

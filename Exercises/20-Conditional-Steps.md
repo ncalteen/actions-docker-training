@@ -24,11 +24,11 @@ deployment fails so that your team can track their troubleshooting steps.
    git checkout -b conditional
    ```
 
-2. Open one of the following workflow files you created previously:
+1. Open one of the following workflow files you created previously:
    - `deploy-prod-docker.yml`
    - `deploy-prod-gcr.yml`
    - `deploy-prod-ecr.yml`
-3. Add the following as a **new** job in the workflow
+1. Add the following as a **new** job in the workflow
 
    ```yaml
    check-status:
@@ -60,14 +60,14 @@ deployment fails so that your team can track their troubleshooting steps.
          run: echo "ERROR! Release failure!
    ```
 
-4. Commit the file
+1. Commit the file
 
    ```bash
    git add .
    git commit -m "Add deployment status updates"
    ```
 
-5. Open a pull request and merge the `conditional` branch into the `main`
+1. Open a pull request and merge the `conditional` branch into the `main`
    branch, making sure to delete the `conditional` branch after doing so
 
    In the pull request, you will see the _Check Release Status_ workflow running

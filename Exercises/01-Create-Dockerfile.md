@@ -13,7 +13,7 @@ choosing.
    git checkout -b docker
    ```
 
-2. In the root of the repository, create a new file named `Dockerfile` with the
+1. In the root of the repository, create a new file named `Dockerfile` with the
    following contents
 
    > **:warning: NOTE:** Make sure to update `orgname` and `reponame` to your
@@ -92,12 +92,12 @@ choosing.
    ENTRYPOINT ["/action/lib/entrypoint.sh"]
    ```
 
-3. Commit the file
+1. Commit the file
 
    ```bash
    git add .
    git commit -m 'Add Dockerfile'
    ```
 
-4. Open a pull request and merge the `docker` branch into the `main` branch,
+1. Open a pull request and merge the `docker` branch into the `main` branch,
    making sure to delete the `docker` branch after doing so

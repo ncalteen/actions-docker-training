@@ -10,7 +10,7 @@ workflows for situations where human intervention is needed.
    git checkout -b manual
    ```
 
-2. In the `.github/workflows/` directory, create a file named `manual.yml` with
+1. In the `.github/workflows/` directory, create a file named `manual.yml` with
    the following contents
 
    > **:warning: NOTE:** This job is primarily used for manual triggers.
@@ -45,20 +45,20 @@ workflows for situations where human intervention is needed.
              echo "- Deploying the following Apps: ${{ github.event.inputs.app_list }}!"
    ```
 
-3. Commit the file
+1. Commit the file
 
    ```bash
    git add .
    git commit -m 'Add manual workflow'
    ```
 
-4. Open a pull request and merge the `manual` branch into the `main` branch,
+1. Open a pull request and merge the `manual` branch into the `main` branch,
    making sure to delete the `manual` branch after doing so
-5. Navigate to the **Actions** tab of your repository
-6. Select the **Manual Deployment** action
-7. Select **Run workflow**
-8. Update any input values and select **Run workflow**
-9. Select the workflow run that appears
-10. Select the **manual-deployment** job
-11. Expand the steps to view the logs and verify the inputs were passed in
-    correctly
+1. Navigate to the **Actions** tab of your repository
+1. Select the **Manual Deployment** action
+1. Select **Run workflow**
+1. Update any input values and select **Run workflow**
+1. Select the workflow run that appears
+1. Select the **manual-deployment** job
+1. Expand the steps to view the logs and verify the inputs were passed in
+   correctly

@@ -38,27 +38,27 @@ Git flow, you can use branch protection to ensure:
    git push -u origin release
    ```
 
-2. Create a new branch called `develop` and push it to GitHub.com
+1. Create a new branch called `develop` and push it to GitHub.com
 
    ```bash
    git checkout -b develop
    git push -u origin develop
    ```
 
-3. On [GitHub.com](https://github.com), navigate to the main page of your
+1. On [GitHub.com](https://github.com), navigate to the main page of your
    repository
-4. Select **Settings**
-5. Under **Code and automation**, select **Branches**
-6. Select **Add branch protection rule**
-7. In the **Branch name pattern** text field, enter `develop`
-8. In the **Protect matching branches** section, select **Require a pull request
+1. Select **Settings**
+1. Under **Code and automation**, select **Branches**
+1. Select **Add branch protection rule**
+1. In the **Branch name pattern** text field, enter `develop`
+1. In the **Protect matching branches** section, select **Require a pull request
    before merging**, and deselect **Require approvals**
-9. Select **Require status checks to pass before merging**, then search for the
+1. Select **Require status checks to pass before merging**, then search for the
    `ci` action you created previously
-10. Select **Create**
-11. Select **Add rule**
-12. In the **Branch name pattern** text field, enter `release`
-13. In the **Protect matching branches** section, select **Require a pull
-    request before merging**
-14. Select **Require status checks to pass before merging**, then search for the
-    `ci` action you created previously
+1. Select **Create**
+1. Select **Add rule**
+1. In the **Branch name pattern** text field, enter `release`
+1. In the **Protect matching branches** section, select **Require a pull request
+   before merging**
+1. Select **Require status checks to pass before merging**, then search for the
+   `ci` action you created previously

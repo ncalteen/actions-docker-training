@@ -23,7 +23,7 @@ pushing a new Gem to the GitHub Packages registry.
    git checkout -b packages
    ```
 
-2. In the `.github/workflows/` directory, create a file named `package.yml` with
+1. In the `.github/workflows/` directory, create a file named `package.yml` with
    the following contents
 
    ```yaml
@@ -72,14 +72,14 @@ pushing a new Gem to the GitHub Packages registry.
              gem push --key github --host https://rubygems.pkg.github.com/${{ github.repository_owner }} ${{ github.event.repository.name }}-0.0.${{ github.run_id }}.gem
    ```
 
-3. Commit the file
+1. Commit the file
 
    ```bash
    git add .
    git commit -m 'Add RubyGem package workflow'
    ```
 
-4. Open a pull request and merge the `packages` branch into the `main` branch,
+1. Open a pull request and merge the `packages` branch into the `main` branch,
    making sure to delete the `packages` branch after doing so
 
    In the pull request, you will see the _GitHub Package Registry / Build Ruby

@@ -10,7 +10,7 @@ that certain jobs will not start until others complete successfully.
 > skipped.
 
 1. Create a branch named `dependent`
-2. In the `.github/workflows/` directory, create a file named `dependent.yml`
+1. In the `.github/workflows/` directory, create a file named `dependent.yml`
    with the following contents
 
    ```yaml
@@ -61,14 +61,14 @@ that certain jobs will not start until others complete successfully.
              echo "We should be running tests...";
    ```
 
-3. Commit the file
+1. Commit the file
 
    ```bash
    git add .
    git commit -m 'Add dependent jobs workflow'
    ```
 
-4. Open a pull request and merge the `dependent` branch into the `main` branch,
+1. Open a pull request and merge the `dependent` branch into the `main` branch,
    making sure to delete the `dependent` branch after doing so
 
    In the pull request, you will see the _Dependent Jobs_ workflow running and
